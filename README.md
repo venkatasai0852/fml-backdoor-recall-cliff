@@ -189,7 +189,8 @@ pdflatex -interaction=nonstopmode -halt-on-error main.tex
 No BibTeX run is needed: the bibliography is a manual `thebibliography` block in
 `sections/refs.tex`. The compile is clean (no errors, no undefined references,
 no overfull boxes) and produces 25 pages. `paper_ieee/main.pdf` is the compiled
-copy. An Overleaf-ready archive is available from the authors.
+copy. The complete `paper_ieee/` folder is self-contained: upload it to Overleaf
+and compile with pdfLaTeX.
 
 ## Provenance
 
