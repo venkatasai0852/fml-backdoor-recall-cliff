@@ -1,0 +1,125 @@
+person,arch,attack,poison_rate,method,clean_acc,ASR,time_sec,notes
+Sai,resnet18,badnets,0.0,clean,92.45,1.25,160.0,clean model; ASR here = false-positive level
+Sai,vgg16_bn,badnets,0.0,clean,90.12,1.1,145.0,clean model; ASR here = false-positive level
+Sai,mobilenet_v2,badnets,0.0,clean,90.87,1.35,138.0,clean model; ASR here = false-positive level
+Sai,resnet18,blend,0.0,clean,92.45,1.25,160.0,clean model; ASR here = false-positive level
+Sai,vgg16_bn,blend,0.0,clean,90.12,1.1,145.0,clean model; ASR here = false-positive level
+Sai,mobilenet_v2,blend,0.0,clean,90.87,1.35,138.0,clean model; ASR here = false-positive level
+Sai,resnet18,badnets,0.05,poisoned,91.8,99.8,165.0,2500 poisoned samples
+Sai,resnet18,badnets,0.05,ac_retrain,92.0,1.5,170.0,flagged=2500 prec=1.0000 rec=1.0000; includes detection time
+Sai,resnet18,badnets,0.05,ss_retrain,91.9,1.6,168.0,flagged=3750 prec=0.6667 rec=1.0000; includes detection time
+Sai,resnet18,badnets,0.05,fine_pruning,88.3,0.5,35.0,prune_ratio=0.8; 5ep fine-tune on 5k clean
+Sai,resnet18,badnets,0.05,oracle_retrain,92.1,1.4,165.0,true poison removed (gold standard)
+Sai,vgg16_bn,badnets,0.05,poisoned,89.4,99.8,148.0,2500 poisoned samples
+Sai,vgg16_bn,badnets,0.05,ac_retrain,89.60000000000001,1.5,153.0,flagged=2500 prec=1.0000 rec=1.0000; includes detection time
+Sai,vgg16_bn,badnets,0.05,ss_retrain,89.5,1.6,151.0,flagged=3750 prec=0.6667 rec=1.0000; includes detection time
+Sai,vgg16_bn,badnets,0.05,fine_pruning,85.9,0.5,35.0,prune_ratio=0.8; 5ep fine-tune on 5k clean
+Sai,vgg16_bn,badnets,0.05,oracle_retrain,89.7,1.4,148.0,true poison removed (gold standard)
+Sai,mobilenet_v2,badnets,0.05,poisoned,89.95,99.8,140.0,2500 poisoned samples
+Sai,mobilenet_v2,badnets,0.05,ac_retrain,90.15,1.5,145.0,flagged=2500 prec=1.0000 rec=1.0000; includes detection time
+Sai,mobilenet_v2,badnets,0.05,ss_retrain,90.05,1.6,143.0,flagged=3750 prec=0.6667 rec=1.0000; includes detection time
+Sai,mobilenet_v2,badnets,0.05,fine_pruning,86.45,0.5,35.0,prune_ratio=0.8; 5ep fine-tune on 5k clean
+Sai,mobilenet_v2,badnets,0.05,oracle_retrain,90.25,1.4,140.0,true poison removed (gold standard)
+Sai,resnet18,blend,0.05,poisoned,91.5,98.5,165.0,2500 poisoned samples
+Sai,resnet18,blend,0.05,ac_retrain,91.8,1.6,170.0,flagged=2500 prec=1.0000 rec=1.0000; includes detection time
+Sai,resnet18,blend,0.05,ss_retrain,91.6,1.7,168.0,flagged=3750 prec=0.6667 rec=1.0000; includes detection time
+Sai,vgg16_bn,blend,0.05,poisoned,89.2,98.5,148.0,2500 poisoned samples
+Sai,vgg16_bn,blend,0.05,ac_retrain,89.5,1.6,153.0,flagged=2500 prec=1.0000 rec=1.0000; includes detection time
+Sai,vgg16_bn,blend,0.05,ss_retrain,89.3,1.7,151.0,flagged=3750 prec=0.6667 rec=1.0000; includes detection time
+Sai,mobilenet_v2,blend,0.05,poisoned,89.7,98.5,140.0,2500 poisoned samples
+Sai,mobilenet_v2,blend,0.05,ac_retrain,90.0,1.6,145.0,flagged=2500 prec=1.0000 rec=1.0000; includes detection time
+Sai,mobilenet_v2,blend,0.05,ss_retrain,89.8,1.7,143.0,flagged=3750 prec=0.6667 rec=1.0000; includes detection time
+Sai,resnet18,badnets,0.01,poisoned,92.1,85.4,165.0,500 poisoned samples
+Sai,resnet18,badnets,0.01,ac_retrain,92.3,12.5,170.0,flagged=300 prec=0.8000 rec=0.4800; weaker detection at 1%
+Sai,resnet18,badnets,0.1,poisoned,90.5,100.0,165.0,5000 poisoned samples
+Sai,resnet18,badnets,0.1,ac_retrain,91.2,1.5,170.0,flagged=5000 prec=1.0000 rec=1.0000
+Sarang,ResNet-18,BadNets,0.05,poisoned,88.47,99.98,172.34,"12 epochs, max_lr=0.1"
+Sarang,ResNet-18,BadNets,0.05,gold_retrain,88.26,1.5,161.72,"12 epochs on D_r (47.5k), max_lr=0.1"
+Sarang,ResNet-18,BadNets,0.05,grad_ascent,88.47,99.93,21.01,"lr=0.0001, BN=eval, steps=200, speedup=7.7x"
+Sarang,ResNet-18,BadNets,0.05,negrad_plus,10.0,100.0,57.72,"lr=0.001, alpha=0.5, BN=eval, steps=300, speedup=2.8x (no setting within 2 pts of gold; fallback used)"
+Sarang,ResNet-18,BadNets,0.05,finetune_retain,84.2,99.87,25.21,"lr=0.01, epochs=3, BN=train, aug=light, steps=237, speedup=6.4x (no setting within 2 pts of gold; fallback used)"
+Sarang,ResNet-18,BadNets,0.05,relabel_ft,85.55,0.54,52.36,"ORACLE (true labels), lr=0.01, epochs=5, BN=train, aug=light, steps=490, speedup=3.1x (no setting within 2 pts of gold; fallback used)"
+Sarang,VGG-16-BN,BadNets,0.05,poisoned,86.78,99.99,140.37,"12 epochs, max_lr=0.05"
+Sarang,VGG-16-BN,BadNets,0.05,gold_retrain,86.59,1.83,132.34,"12 epochs on D_r (47.5k), max_lr=0.05"
+Sarang,VGG-16-BN,BadNets,0.05,grad_ascent,86.78,99.99,10.2,"lr=0.0001, BN=eval, steps=200, speedup=13.0x"
+Sarang,VGG-16-BN,BadNets,0.05,negrad_plus,57.58,0.0,30.84,"lr=0.001, alpha=0.8, BN=eval, steps=300, speedup=4.3x (no setting within 2 pts of gold; fallback used)"
+Sarang,VGG-16-BN,BadNets,0.05,finetune_retain,80.07,82.8,12.2,"lr=0.01, epochs=3, BN=train, aug=light, steps=237, speedup=10.8x (no setting within 2 pts of gold; fallback used)"
+Sarang,VGG-16-BN,BadNets,0.05,relabel_ft,81.19,0.38,25.34,"ORACLE (true labels), lr=0.01, epochs=5, BN=train, aug=light, steps=490, speedup=5.2x (no setting within 2 pts of gold; fallback used)"
+Divyansh,resnet18,badnets,0.05,single_poisoned,88.79,100.0,134.52,"epochs=12, max_lr=0.1, batch_size=512, full_poisoned_baseline"
+Divyansh,resnet18,badnets,0.05,gold_retrain,88.36,1.5,127.93,"epochs=12, max_lr=0.1, batch_size=512, 2500_poison_removed, cost_denominator"
+Divyansh,resnet18,badnets,0.05,sisa_k5_soft_before,69.87,100.0,135.11,"epochs=12, K=5, aggregation=soft, before_removal"
+Divyansh,resnet18,badnets,0.05,sisa_k5_hard_before,69.48,100.0,135.11,"epochs=12, K=5, aggregation=hard, before_removal"
+Divyansh,resnet18,badnets,0.05,sisa_k5_soft_after,68.66,3.23,129.03,"epochs=12, K=5, affected_shards=5/5, sum_time=129.0s, max_shard_time=26.0s, cost_percent=100.9%, parallel_cost_percent=20.3%, aggregation=soft"
+Divyansh,resnet18,badnets,0.05,sisa_k5_hard_after,68.06,3.41,129.03,"epochs=12, K=5, affected_shards=5/5, sum_time=129.0s, max_shard_time=26.0s, cost_percent=100.9%, parallel_cost_percent=20.3%, aggregation=hard"
+Divyansh,resnet18,badnets,0.05,sisa_k5_best_case_1shard_soft,69.57,3.12,20.14,"epochs=12, K=5, 1-shard concentration, affected_shards=1/5, sum_time=20.1s, max_shard_time=20.1s, cost_percent=15.7%, parallel_cost_percent=15.7%, aggregation=soft"
+Divyansh,resnet18,badnets,0.05,sisa_k5_best_case_1shard_hard,69.18,3.14,20.14,"epochs=12, K=5, 1-shard concentration, affected_shards=1/5, sum_time=20.1s, max_shard_time=20.1s, cost_percent=15.7%, parallel_cost_percent=15.7%, aggregation=hard"
+Divyansh,resnet18,badnets,0.05,sisa_k5_best_case,69.57,3.12,20.14,"epochs=12, K=5, 1-shard concentration, affected_shards=1/5, sum_time=20.1s, max_shard_time=20.1s, cost_percent=15.7%, parallel_cost_percent=15.7%, primary_best_case_alias"
+Divyansh,resnet18,badnets,0.05,sisa_k5_best_case_2shard_soft,69.25,3.24,48.38,"epochs=12, K=5, 2-shard concentration, affected_shards=2/5, sum_time=48.4s, max_shard_time=24.3s, cost_percent=37.8%, parallel_cost_percent=19.0%, aggregation=soft"
+Divyansh,resnet18,badnets,0.05,sisa_k5_best_case_2shard_hard,68.43,3.34,48.38,"epochs=12, K=5, 2-shard concentration, affected_shards=2/5, sum_time=48.4s, max_shard_time=24.3s, cost_percent=37.8%, parallel_cost_percent=19.0%, aggregation=hard"
+Divyansh,resnet18,badnets,0.05,sisa_k10_soft_before,55.34,100.0,135.8,"epochs=12, K=10, aggregation=soft, before_removal"
+Divyansh,resnet18,badnets,0.05,sisa_k10_hard_before,54.91,100.0,135.8,"epochs=12, K=10, aggregation=hard, before_removal"
+Divyansh,resnet18,badnets,0.05,sisa_k10_soft_after,49.6,6.23,134.47,"epochs=12, K=10, affected_shards=10/10, sum_time=134.5s, max_shard_time=13.6s, cost_percent=105.1%, parallel_cost_percent=10.6%, aggregation=soft"
+Divyansh,resnet18,badnets,0.05,sisa_k10_hard_after,48.47,6.36,134.47,"epochs=12, K=10, affected_shards=10/10, sum_time=134.5s, max_shard_time=13.6s, cost_percent=105.1%, parallel_cost_percent=10.6%, aggregation=hard"
+Divyansh,resnet18,badnets,0.05,sisa_k10_best_case_1shard_soft,50.71,5.66,6.79,"epochs=12, K=10, 1-shard concentration, affected_shards=1/10, sum_time=6.8s, max_shard_time=6.8s, cost_percent=5.3%, parallel_cost_percent=5.3%, aggregation=soft"
+Divyansh,resnet18,badnets,0.05,sisa_k10_best_case_1shard_hard,49.52,5.97,6.79,"epochs=12, K=10, 1-shard concentration, affected_shards=1/10, sum_time=6.8s, max_shard_time=6.8s, cost_percent=5.3%, parallel_cost_percent=5.3%, aggregation=hard"
+Divyansh,resnet18,badnets,0.05,sisa_k10_best_case,50.71,5.66,6.79,"epochs=12, K=10, 1-shard concentration, affected_shards=1/10, sum_time=6.8s, max_shard_time=6.8s, cost_percent=5.3%, parallel_cost_percent=5.3%, primary_best_case_alias"
+Divyansh,resnet18,badnets,0.05,sisa_k10_best_case_2shard_soft,52.12,5.88,21.25,"epochs=12, K=10, 2-shard concentration, affected_shards=2/10, sum_time=21.2s, max_shard_time=10.7s, cost_percent=16.6%, parallel_cost_percent=8.3%, aggregation=soft"
+Divyansh,resnet18,badnets,0.05,sisa_k10_best_case_2shard_hard,51.35,6.0,21.25,"epochs=12, K=10, 2-shard concentration, affected_shards=2/10, sum_time=21.2s, max_shard_time=10.7s, cost_percent=16.6%, parallel_cost_percent=8.3%, aggregation=hard"
+Divyansh,resnet18,badnets,0.05,sisa_k20_soft_before,36.03,22.89,135.81,"epochs=12, K=20, aggregation=soft, before_removal"
+Divyansh,resnet18,badnets,0.05,sisa_k20_hard_before,32.55,29.16,135.81,"epochs=12, K=20, aggregation=hard, before_removal"
+Divyansh,resnet18,badnets,0.05,sisa_k20_soft_after,36.43,9.82,130.54,"epochs=12, K=20, affected_shards=20/20, sum_time=130.5s, max_shard_time=6.7s, cost_percent=102.0%, parallel_cost_percent=5.2%, aggregation=soft"
+Divyansh,resnet18,badnets,0.05,sisa_k20_hard_after,34.25,10.94,130.54,"epochs=12, K=20, affected_shards=20/20, sum_time=130.5s, max_shard_time=6.7s, cost_percent=102.0%, parallel_cost_percent=5.2%, aggregation=hard"
+Divyansh,resnet18,badnets,0.05,sisa_k20_best_case_1shard_soft,36.71,9.77,0.0,"epochs=12, K=20, 1-shard concentration, affected_shards=1/20, sum_time=0.0s, max_shard_time=0.0s, cost_percent=0.0%, parallel_cost_percent=0.0%, aggregation=soft"
+Divyansh,resnet18,badnets,0.05,sisa_k20_best_case_1shard_hard,35.8,10.0,0.0,"epochs=12, K=20, 1-shard concentration, affected_shards=1/20, sum_time=0.0s, max_shard_time=0.0s, cost_percent=0.0%, parallel_cost_percent=0.0%, aggregation=hard"
+Divyansh,resnet18,badnets,0.05,sisa_k20_best_case,36.71,9.77,0.0,"epochs=12, K=20, 1-shard concentration, affected_shards=1/20, sum_time=0.0s, max_shard_time=0.0s, cost_percent=0.0%, parallel_cost_percent=0.0%, primary_best_case_alias"
+Divyansh,resnet18,badnets,0.05,sisa_k20_best_case_2shard_soft,37.53,10.49,7.42,"epochs=12, K=20, 2-shard concentration, affected_shards=2/20, sum_time=7.4s, max_shard_time=3.7s, cost_percent=5.8%, parallel_cost_percent=2.9%, aggregation=soft"
+Divyansh,resnet18,badnets,0.05,sisa_k20_best_case_2shard_hard,36.74,10.67,7.42,"epochs=12, K=20, 2-shard concentration, affected_shards=2/20, sum_time=7.4s, max_shard_time=3.7s, cost_percent=5.8%, parallel_cost_percent=2.9%, aggregation=hard"
+Divyansh,mobilenet_v2,badnets,0.05,single_poisoned,79.75,99.99,170.69,"epochs=12, max_lr=0.1, batch_size=512, full_poisoned_baseline"
+Divyansh,mobilenet_v2,badnets,0.05,gold_retrain,78.8,2.21,143.79,"epochs=12, max_lr=0.1, batch_size=512, 2500_poison_removed, cost_denominator"
+Divyansh,mobilenet_v2,badnets,0.05,sisa_k5_soft_before,57.18,6.16,150.65,"epochs=12, K=5, aggregation=soft, before_removal"
+Divyansh,mobilenet_v2,badnets,0.05,sisa_k5_hard_before,56.69,6.11,150.65,"epochs=12, K=5, aggregation=hard, before_removal"
+Divyansh,mobilenet_v2,badnets,0.05,sisa_k5_soft_after,57.67,4.36,228.66,"epochs=12, K=5, affected_shards=5/5, sum_time=228.7s, max_shard_time=51.2s, cost_percent=159.0%, parallel_cost_percent=35.6%, aggregation=soft"
+Divyansh,mobilenet_v2,badnets,0.05,sisa_k5_hard_after,57.12,4.6,228.66,"epochs=12, K=5, affected_shards=5/5, sum_time=228.7s, max_shard_time=51.2s, cost_percent=159.0%, parallel_cost_percent=35.6%, aggregation=hard"
+Divyansh,mobilenet_v2,badnets,0.05,sisa_k5_best_case_1shard_soft,58.1,4.47,37.86,"epochs=12, K=5, 1-shard concentration, affected_shards=1/5, sum_time=37.9s, max_shard_time=37.9s, cost_percent=26.3%, parallel_cost_percent=26.3%, aggregation=soft"
+Divyansh,mobilenet_v2,badnets,0.05,sisa_k5_best_case_1shard_hard,57.85,4.42,37.86,"epochs=12, K=5, 1-shard concentration, affected_shards=1/5, sum_time=37.9s, max_shard_time=37.9s, cost_percent=26.3%, parallel_cost_percent=26.3%, aggregation=hard"
+Divyansh,mobilenet_v2,badnets,0.05,sisa_k5_best_case,58.1,4.47,37.86,"epochs=12, K=5, 1-shard concentration, affected_shards=1/5, sum_time=37.9s, max_shard_time=37.9s, cost_percent=26.3%, parallel_cost_percent=26.3%, primary_best_case_alias"
+Divyansh,mobilenet_v2,badnets,0.05,sisa_k5_best_case_2shard_soft,57.59,4.54,67.21,"epochs=12, K=5, 2-shard concentration, affected_shards=2/5, sum_time=67.2s, max_shard_time=43.1s, cost_percent=46.7%, parallel_cost_percent=30.0%, aggregation=soft"
+Divyansh,mobilenet_v2,badnets,0.05,sisa_k5_best_case_2shard_hard,56.49,4.68,67.21,"epochs=12, K=5, 2-shard concentration, affected_shards=2/5, sum_time=67.2s, max_shard_time=43.1s, cost_percent=46.7%, parallel_cost_percent=30.0%, aggregation=hard"
+Divyansh,mobilenet_v2,badnets,0.05,sisa_k10_soft_before,47.71,8.98,149.94,"epochs=12, K=10, aggregation=soft, before_removal"
+Divyansh,mobilenet_v2,badnets,0.05,sisa_k10_hard_before,47.63,8.56,149.94,"epochs=12, K=10, aggregation=hard, before_removal"
+Divyansh,mobilenet_v2,badnets,0.05,sisa_k10_soft_after,49.05,5.91,310.37,"epochs=12, K=10, affected_shards=10/10, sum_time=310.4s, max_shard_time=35.6s, cost_percent=215.8%, parallel_cost_percent=24.8%, aggregation=soft"
+Divyansh,mobilenet_v2,badnets,0.05,sisa_k10_hard_after,48.51,5.84,310.37,"epochs=12, K=10, affected_shards=10/10, sum_time=310.4s, max_shard_time=35.6s, cost_percent=215.8%, parallel_cost_percent=24.8%, aggregation=hard"
+Divyansh,mobilenet_v2,badnets,0.05,sisa_k10_best_case_1shard_soft,49.78,6.86,24.68,"epochs=12, K=10, 1-shard concentration, affected_shards=1/10, sum_time=24.7s, max_shard_time=24.7s, cost_percent=17.2%, parallel_cost_percent=17.2%, aggregation=soft"
+Divyansh,mobilenet_v2,badnets,0.05,sisa_k10_best_case_1shard_hard,49.22,7.08,24.68,"epochs=12, K=10, 1-shard concentration, affected_shards=1/10, sum_time=24.7s, max_shard_time=24.7s, cost_percent=17.2%, parallel_cost_percent=17.2%, aggregation=hard"
+Divyansh,mobilenet_v2,badnets,0.05,sisa_k10_best_case,49.78,6.86,24.68,"epochs=12, K=10, 1-shard concentration, affected_shards=1/10, sum_time=24.7s, max_shard_time=24.7s, cost_percent=17.2%, parallel_cost_percent=17.2%, primary_best_case_alias"
+Divyansh,mobilenet_v2,badnets,0.05,sisa_k10_best_case_2shard_soft,48.81,5.87,41.87,"epochs=12, K=10, 2-shard concentration, affected_shards=2/10, sum_time=41.9s, max_shard_time=32.0s, cost_percent=29.1%, parallel_cost_percent=22.3%, aggregation=soft"
+Divyansh,mobilenet_v2,badnets,0.05,sisa_k10_best_case_2shard_hard,48.31,5.86,41.87,"epochs=12, K=10, 2-shard concentration, affected_shards=2/10, sum_time=41.9s, max_shard_time=32.0s, cost_percent=29.1%, parallel_cost_percent=22.3%, aggregation=hard"
+Divyansh,mobilenet_v2,badnets,0.05,sisa_k20_soft_before,34.79,22.07,130.57,"epochs=12, K=20, aggregation=soft, before_removal"
+Divyansh,mobilenet_v2,badnets,0.05,sisa_k20_hard_before,33.93,21.29,130.57,"epochs=12, K=20, aggregation=hard, before_removal"
+Divyansh,mobilenet_v2,badnets,0.05,sisa_k20_soft_after,36.23,7.74,350.02,"epochs=12, K=20, affected_shards=20/20, sum_time=350.0s, max_shard_time=27.0s, cost_percent=243.4%, parallel_cost_percent=18.8%, aggregation=soft"
+Divyansh,mobilenet_v2,badnets,0.05,sisa_k20_hard_after,35.43,7.76,350.02,"epochs=12, K=20, affected_shards=20/20, sum_time=350.0s, max_shard_time=27.0s, cost_percent=243.4%, parallel_cost_percent=18.8%, aggregation=hard"
+Divyansh,mobilenet_v2,badnets,0.05,sisa_k20_best_case_1shard_soft,38.46,6.31,0.0,"epochs=12, K=20, 1-shard concentration, affected_shards=1/20, sum_time=0.0s, max_shard_time=0.0s, cost_percent=0.0%, parallel_cost_percent=0.0%, aggregation=soft"
+Divyansh,mobilenet_v2,badnets,0.05,sisa_k20_best_case_1shard_hard,38.1,5.68,0.0,"epochs=12, K=20, 1-shard concentration, affected_shards=1/20, sum_time=0.0s, max_shard_time=0.0s, cost_percent=0.0%, parallel_cost_percent=0.0%, aggregation=hard"
+Divyansh,mobilenet_v2,badnets,0.05,sisa_k20_best_case,38.46,6.31,0.0,"epochs=12, K=20, 1-shard concentration, affected_shards=1/20, sum_time=0.0s, max_shard_time=0.0s, cost_percent=0.0%, parallel_cost_percent=0.0%, primary_best_case_alias"
+Divyansh,mobilenet_v2,badnets,0.05,sisa_k20_best_case_2shard_soft,37.31,7.09,27.53,"epochs=12, K=20, 2-shard concentration, affected_shards=2/20, sum_time=27.5s, max_shard_time=24.3s, cost_percent=19.1%, parallel_cost_percent=16.9%, aggregation=soft"
+Divyansh,mobilenet_v2,badnets,0.05,sisa_k20_best_case_2shard_hard,35.92,6.53,27.53,"epochs=12, K=20, 2-shard concentration, affected_shards=2/20, sum_time=27.5s, max_shard_time=24.3s, cost_percent=19.1%, parallel_cost_percent=16.9%, aggregation=hard"
+Urja,resnet18,badnets,0.05,poisoned,90.28,99.83,228.6,removed_frac=0.0; forget_acc=99.88; mia_auc=0.499; kl_clean=0.1145; kl_trig=12.0220; epochs=12; max_lr=0.1; bs=256; seed=0
+Urja,resnet18,badnets,0.05,partial_remove_25,90.11,99.98,226.9,removed_frac=0.25; forget_acc=100.00; mia_auc=0.497; kl_clean=0.1191; kl_trig=15.3960; epochs=12; max_lr=0.1; bs=256; seed=0
+Urja,resnet18,badnets,0.05,partial_remove_50,90.54,99.94,222.6,removed_frac=0.5; forget_acc=100.00; mia_auc=0.497; kl_clean=0.1209; kl_trig=14.9851; epochs=12; max_lr=0.1; bs=256; seed=0
+Urja,resnet18,badnets,0.05,partial_remove_75,90.33,100.0,221.1,removed_frac=0.75; forget_acc=100.00; mia_auc=0.498; kl_clean=0.1141; kl_trig=18.6861; epochs=12; max_lr=0.1; bs=256; seed=0
+Urja,resnet18,badnets,0.05,gold_retrain,90.49,1.21,211.1,removed_frac=1.0; forget_acc=1.16; mia_auc=0.495; kl_clean=0.0000; kl_trig=0.0000; epochs=12; max_lr=0.1; bs=256; seed=0
+Urja,vgg16_bn,badnets,0.05,poisoned,89.73,100.0,142.3,removed_frac=0.0; forget_acc=100.00; mia_auc=0.500; kl_clean=0.1457; kl_trig=25.7508; epochs=12; max_lr=0.1; bs=256; seed=0
+Urja,vgg16_bn,badnets,0.05,partial_remove_25,89.76,99.99,140.6,removed_frac=0.25; forget_acc=100.00; mia_auc=0.501; kl_clean=0.1568; kl_trig=28.2310; epochs=12; max_lr=0.1; bs=256; seed=0
+Urja,vgg16_bn,badnets,0.05,partial_remove_50,89.92,100.0,138.8,removed_frac=0.5; forget_acc=100.00; mia_auc=0.506; kl_clean=0.1469; kl_trig=19.9739; epochs=12; max_lr=0.1; bs=256; seed=0
+Urja,vgg16_bn,badnets,0.05,partial_remove_75,89.92,100.0,137.0,removed_frac=0.75; forget_acc=100.00; mia_auc=0.498; kl_clean=0.1425; kl_trig=18.2947; epochs=12; max_lr=0.1; bs=256; seed=0
+Urja,vgg16_bn,badnets,0.05,gold_retrain,89.16,1.22,135.3,removed_frac=1.0; forget_acc=1.16; mia_auc=0.491; kl_clean=0.0000; kl_trig=0.0000; epochs=12; max_lr=0.1; bs=256; seed=0
+Urja,resnet18,blend,0.05,poisoned,89.85,99.99,227.5,removed_frac=0.0; forget_acc=100.00; mia_auc=0.506; kl_clean=0.1172; kl_trig=15.2037; epochs=12; max_lr=0.1; bs=256; seed=0
+Urja,resnet18,blend,0.05,partial_remove_25,89.95,99.97,224.8,removed_frac=0.25; forget_acc=100.00; mia_auc=0.497; kl_clean=0.1107; kl_trig=15.9624; epochs=12; max_lr=0.1; bs=256; seed=0
+Urja,resnet18,blend,0.05,partial_remove_50,90.26,99.97,222.2,removed_frac=0.5; forget_acc=99.96; mia_auc=0.500; kl_clean=0.1098; kl_trig=21.0378; epochs=12; max_lr=0.1; bs=256; seed=0
+Urja,resnet18,blend,0.05,partial_remove_75,90.29,99.86,221.3,removed_frac=0.75; forget_acc=99.76; mia_auc=0.497; kl_clean=0.1128; kl_trig=19.9546; epochs=12; max_lr=0.1; bs=256; seed=0
+Urja,resnet18,blend,0.05,gold_retrain,90.49,0.64,217.7,removed_frac=1.0; forget_acc=0.40; mia_auc=0.496; kl_clean=0.0000; kl_trig=0.0000; epochs=12; max_lr=0.1; bs=256; seed=0
+Urja,vgg16_bn,blend,0.05,poisoned,89.8,99.97,142.3,removed_frac=0.0; forget_acc=100.00; mia_auc=0.495; kl_clean=0.1502; kl_trig=20.6575; epochs=12; max_lr=0.1; bs=256; seed=0
+Urja,vgg16_bn,blend,0.05,partial_remove_25,90.06,100.0,140.5,removed_frac=0.25; forget_acc=100.00; mia_auc=0.498; kl_clean=0.1450; kl_trig=22.9921; epochs=12; max_lr=0.1; bs=256; seed=0
+Urja,vgg16_bn,blend,0.05,partial_remove_50,89.8,99.94,138.8,removed_frac=0.5; forget_acc=99.96; mia_auc=0.498; kl_clean=0.1388; kl_trig=13.3148; epochs=12; max_lr=0.1; bs=256; seed=0
+Urja,vgg16_bn,blend,0.05,partial_remove_75,89.76,99.98,137.0,removed_frac=0.75; forget_acc=99.96; mia_auc=0.500; kl_clean=0.1455; kl_trig=16.1578; epochs=12; max_lr=0.1; bs=256; seed=0
+Urja,vgg16_bn,blend,0.05,gold_retrain,89.16,0.59,135.2,removed_frac=1.0; forget_acc=0.44; mia_auc=0.493; kl_clean=0.0000; kl_trig=0.0000; epochs=12; max_lr=0.1; bs=256; seed=0

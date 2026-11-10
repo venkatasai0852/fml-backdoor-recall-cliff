@@ -1,0 +1,111 @@
+\documentclass[journal]{IEEEtran}
+
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{balance}
+\usepackage{url}
+\urlstyle{same}
+
+\graphicspath{{figures/}}
+
+% Float placement: the paper carries 20 figures and 15 tables.
+\setcounter{topnumber}{3}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{4}
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\textfraction}{0.07}
+\renewcommand{\floatpagefraction}{0.75}
+
+\newcommand{\fset}{\mathcal{F}}
+\newcommand{\Retrain}{\textup{Retrain}$_{\setminus F}$}
+\newcommand{\rstar}{r^{\ast}}
+\newcommand{\gstar}{\gamma^{\ast}}
+\newcommand{\ASR}{\mathrm{ASR}}
+\newcommand{\ie}{\mbox{i.e.}}
+\newcommand{\eg}{\mbox{e.g.}}
+\newcommand{\etal}{\mbox{et al.}}
+\newcommand{\method}[1]{\textsc{#1}}
+
+% IEEEtran's biography block separates entries with infinite glue, which
+% leaves very large gaps when only a few short no-photo entries end the paper.
+\renewenvironment{IEEEbiographynophoto}[1]{%
+  \normalfont\footnotesize\interlinepenalty=10000\relax%
+  \vskip 1.5\baselineskip%
+  \parskip=0pt\par\noindent\textbf{#1}\ \ignorespaces}{\par\normalfont}
+
+\begin{document}
+
+\title{When the Detector Is Wrong:\\A Controlled Study of Post-Training\\Backdoor Removal Under Imperfect Recall}
+
+\author{Thota Venkata Sai, Sarang N S, Divyansh Tiwari, and Urja Mandali%
+\thanks{The authors are with the Department of Electronics and Communication
+Engineering, Sardar Vallabhbhai National Institute of Technology (SVNIT),
+Surat 395007, India. Code, frozen results, and manuscript source:
+\protect\url{https://github.com/venkatasai0852/fml-backdoor-recall-cliff}.}}
+
+\markboth{Sai \MakeLowercase{\textit{et al.}}}%
+{When the Detector Is Wrong}
+
+\maketitle
+
+\begin{abstract}
+Post-training removal of backdoors is normally evaluated with an oracle forget
+set, yet a practitioner must act on detector output that is neither complete
+nor precise. We present a controlled study of how detector recall and precision
+govern removal success. Forget sets $\fset(r,p)$ are constructed to contain a
+specified fraction of the poison at a specified precision, and five removal
+families are swept over ten $(r,p)$ cells and three seeds, with the critical
+cells repeated on three further architecture--attack combinations.
+Deletion-based removal is a step function of the
+poison left behind: retraining on the retained set meets the success criterion
+only at $r{=}1.0$, because at $r{=}0.95$ attack success is still low but the
+clean-accuracy cost already breaks the criterion, and at $r{=}0.90$ the
+backdoor returns at full strength. A repair-and-inoculate recipe tolerates
+$r{=}0.5$, but only
+because it uses the known trigger; when the trigger is synthesised instead, the
+overlap with the true patch is zero and attack success stays above 95\%. Two
+proposed refinements fail at scale: calibrate-then-remove cannot find a usable
+proxy threshold, and partial unlearning does not amplify the detectability of
+missed poison. Apparent removal by feature-space ascent is a batch-norm
+artefact. Durability probes on the oracle-deleted model show suppression rather
+than erasure: one hundred poisoned samples restore 97.7\% attack success within
+ten steps. On RadioML automatic modulation classification the same recall cliff
+appears in the minimum recall $\gstar$ as a function of SNR. We conclude that
+post-training removal is bounded by detector recall, and that trigger-aware
+repair is a ceiling for the field rather than a deployable blind defence.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Backdoor defence, data poisoning, machine unlearning, detector recall,
+trustworthy machine learning, radio modulation classification.
+\end{IEEEkeywords}
+
+\input{sections/sec1_intro}
+\input{sections/sec2_related}
+\input{sections/sec3_problem}
+\input{sections/sec4_methods}
+\input{sections/sec5_protocol}
+\input{sections/sec6_cliff}
+\input{sections/sec7_general}
+\input{sections/sec8_calib}
+\input{sections/sec9_durability}
+\input{sections/sec10_rf}
+\input{sections/sec11_discussion}
+\input{sections/sec12_limits}
+\input{sections/sec13_conclusion}
+
+\input{sections/contributions}
+
+\input{sections/refs}
+
+\input{sections/bios}
+
+\end{document}

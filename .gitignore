@@ -1,0 +1,34 @@
+# datasets and checkpoints (not redistributed)
+data/*
+!data/README.md
+*.pt
+*.pth
+*.pkl
+*.ckpt
+checkpoints/
+
+# python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# generated assets and scratch merges
+paper_ieee/generated/
+results/all_runs/
+results/merged_runs.csv
+
+# latex build products
+paper_ieee/*.aux
+paper_ieee/*.log
+paper_ieee/*.out
+paper_ieee/*.toc
+paper_ieee/*.fls
+paper_ieee/*.fdb_latexmk
+paper_ieee/*.synctex.gz
+
+# os and archives
+.DS_Store
+Thumbs.db
+*.zip

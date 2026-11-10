@@ -1,0 +1,25 @@
+\begin{table}[t]
+\centering
+\caption{E8: ascent-based 'removal' is a normalisation artefact.}
+\label{tab:e8}
+\footnotesize
+\begin{tabular}{llcc}
+\toprule
+\textbf{Variant} & \textbf{Setting} & \textbf{Clean} & \textbf{ASR} \\
+\midrule
+Raw ascent & lr0.0002 ep2 & 88.03 & 18.06 \\
+Raw ascent & lr0.0005 ep2 & 87.31 & 2.87 \\
+Raw ascent & lr0.001 ep2 & 85.29 & 0.18 \\
+Raw ascent & lr0.001 ep4 & 77.25 & 0.00 \\
+BN-guarded ascent & lr0.0002 ep2 & 88.74 & 99.98 \\
+BN-guarded ascent & lr0.0005 ep2 & 88.72 & 99.98 \\
+BN-guarded ascent & lr0.001 ep2 & 88.72 & 99.97 \\
+BN-guarded ascent & lr0.001 ep4 & 88.73 & 99.94 \\
+Label repair & lr0.005 ep2 & 87.91 & 10.11 \\
+Label repair & lr0.01 ep1 & 87.15 & 16.36 \\
+Label repair (v2) & lr0.005 ep2 & 87.94 & 8.63 \\
+Label repair (v2) & lr0.01 ep1 & 87.45 & 15.11 \\
+\bottomrule
+\end{tabular}
+\par\vspace{1pt}\footnotesize\raggedright Seed 1. Raw feature-space ascent appears to remove the backdoor only by destroying the network: clean accuracy falls from $88.03\%$ at the gentlest setting to $77.25\%$ at lr $10^{-3}$ for four epochs, 11.4 points below the gold mean. Re-running the identical schedule with batch-norm statistics frozen to the retain set leaves ASR at $\approx100\%$: the apparent removal was BN corruption, not unlearning. Label repair at the same strength reduces ASR while keeping clean accuracy within 1.5 points.
+\end{table}

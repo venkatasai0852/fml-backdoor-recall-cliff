@@ -1,0 +1,8 @@
+tag,clean,asr,auc_missed_vs_clean0,ss_score_missed,ss_score_clean0,topk_missed_recall
+BASE,63.46,99.76,0.5491,6.644,5.925,25.3
+repair lr=0.005 ep=2 ret=0,59.58,58.44,0.6496,6.237,4.17,19.3
+repair lr=0.01 ep=1 ret=0,61.3,85.95,0.6294,5.592,4.026,18.0
+repair lr=0.01 ep=2 ret=1,55.68,0.31,0.6717,11.531,6.426,30.3
+repair lr=0.01 ep=3 ret=2,54.02,1.64,0.6493,7.072,4.812,24.7
+clean-ctrl lr=0.005 ep=2,63.04,99.93,0.5481,9.155,8.198,35.0
+clean-ctrl lr=0.01 ep=1,63.26,99.78,0.5501,7.762,6.935,29.3

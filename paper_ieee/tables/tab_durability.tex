@@ -1,0 +1,27 @@
+\begin{table}[t]
+\centering
+\caption{E5: durability probes on the oracle-deleted model.}
+\label{tab:durability}
+\footnotesize
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{lcccc}
+\toprule
+\multicolumn{5}{@{}l}{\emph{(a) Relearning: ASR (\%) after $k$ steps on 100 fresh poison samples}}\\
+\textbf{Setting} & \textbf{Step 0} & \textbf{Step 5} & \textbf{Step 10} & \textbf{Step 50} \\
+\midrule
+R18/BadNets & 1.2 & 25.2 & 100.0 & 99.9 \\
+R18/Blend & 0.6 & 96.0 & 99.3 & 98.7 \\
+VGG/BadNets & 1.2 & 4.7 & 97.7 & 99.9 \\
+VGG/Blend & 0.6 & 78.2 & 99.9 & 98.9 \\
+\midrule
+\multicolumn{5}{@{}l}{\emph{(b) Representational probes on the same model}}\\
+\textbf{Setting} & \textbf{MIA AUC} & \textbf{KL clean} & \textbf{KL trigger} & \\
+\midrule
+R18/BadNets & 0.495 & 0.000 & 0.0 & \\
+R18/Blend & 0.495 & 0.000 & 0.0 & \\
+VGG/BadNets & 0.491 & 0.000 & 0.0 & \\
+VGG/Blend & 0.493 & 0.000 & 0.0 & \\
+\bottomrule
+\end{tabular}
+\par\vspace{1pt}\footnotesize\raggedright The gold (oracle-deleted) model, i.e.\ the best case any removal method can reach. One hundred fresh poisoned samples restore ASR to $\geq97.6\%$ within 10 steps in all four settings; the loss-threshold MIA sits at chance (0.49--0.50); and the clean-vs-trigger KL gap that characterises a live backdoor (0.11--0.16 vs.\ 12--28 in the poisoned model) has vanished. Suppression, not erasure.
+\end{table}

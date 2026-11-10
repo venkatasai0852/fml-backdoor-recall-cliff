@@ -1,0 +1,19 @@
+\begin{table}[t]
+\centering
+\caption{E6: realistic detector columns reproduce the simulated grid.}
+\label{tab:e6}
+\footnotesize
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Method} & \textbf{Recall} & \textbf{Precision} & \textbf{Clean} & \textbf{ASR} \\
+\midrule
+Retrain$_{\setminus F}$ & 1.000 & 1.000 & 88.70 & 1.62 \\
+SCRUB & 1.000 & 1.000 & 61.37 & 100.00 \\
+Recipe & 1.000 & 1.000 & 88.04 & 0.70 \\
+Retrain$_{\setminus F}$ & 0.834 & 0.834 & 88.89 & 99.87 \\
+SCRUB & 0.834 & 0.834 & 86.89 & 100.00 \\
+Recipe & 0.834 & 0.834 & 88.18 & 1.43 \\
+\bottomrule
+\end{tabular}
+\par\vspace{1pt}\footnotesize\raggedright Removal driven by the detectors' \emph{raw} flag sets (no simulation), seed 0. AC flags exactly the poison here; SS trades 16.6\% of recall for 16.6\% precision. Deletion inherits the detector's recall error directly; repair$+$inoculation does not.
+\end{table}

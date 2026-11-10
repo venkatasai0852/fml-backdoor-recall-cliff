@@ -1,0 +1,26 @@
+\begin{table}[t]
+\centering
+\caption{Experiment blocks. E4 was planned and not executed; every other block is
+reported in the section listed.}
+\label{tab:blocks}
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{@{}l >{\raggedright\arraybackslash}p{0.30\columnwidth} >{\raggedright\arraybackslash}p{0.34\columnwidth} c@{}}
+\toprule
+\textbf{Block} & \textbf{Question} & \textbf{What was run} & \textbf{Sec.} \\
+\midrule
+E1 & Does removal survive imperfect recall? & 10 $(r,p)$ cells $\times$ 5 methods $\times$ 3 seeds, ResNet-18/BadNets; inoculation-only baseline & VI \\
+E2 & Is the cliff about residual poison? & 4 architecture--attack pairs $\times$ 5 residual fractions (0--100\%) & VI \\
+E3 & Can calibration choose the threshold? & 20 SS thresholds with proxy removal; two full retrains & VIII \\
+E4 & Does an adaptive attacker break the recipe? & planned, not executed & XII \\
+E5 & Erasure or suppression? & 4 settings $\times$ relearning to 50 steps; MIA and KL probes & IX \\
+E6 & Do real detector columns reproduce the cliff? & AC and SS at 1\%, 5\%, 10\% poison; deletion and recipe at realised operating points & VI \\
+E7 & Does the cliff transfer? & VGG-16-BN/BadNets, VGG-16-BN/Blend, ResNet-18/Blend at $r{=}0.75,0.5$ & VII \\
+E7b & Can the trigger be synthesised? & Neural-Cleanse synthesis on two attacks & VII \\
+E8 & Is ascent removal real? & 4 ascent strengths $\times$ raw and BN-guarded & VIII \\
+E9 & Does partial repair amplify detectability? & 10\% poison, 3 seeds $\times$ 2 repair strengths $+$ matched controls & VIII \\
+SISA & How do efficiency-oriented baselines compare? & SISA-5 shards; fine-pruning at two thresholds & IX \\
+RF & Does the cliff cross domains? & RadioML AMC, 4 methods $\times$ 3 recalls, 20 SNR bins, 3 seeds & X \\
+\bottomrule
+\end{tabular}
+\end{table}

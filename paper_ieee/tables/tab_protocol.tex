@@ -1,0 +1,24 @@
+\begin{table}[t]
+\centering
+\caption{Frozen experimental protocol. Every row of every table in this paper was produced under these settings; only the listed knobs vary between experiments.}
+\label{tab:protocol}
+\footnotesize
+\begin{tabular}{@{}l >{\raggedright\arraybackslash}p{0.64\columnwidth}@{}}
+\toprule
+\textbf{Item} & \textbf{Setting} \\
+\midrule
+Dataset & CIFAR-10, 50k train / 10k test, 10 classes, target class 0 \\
+Attacks & BadNets $4\times4$ checkerboard (rows/cols 27--30); Blend $0.8x+0.2\,\mathrm{pattern}$, seed 123 \\
+Poison rate & 5\% (2{,}500 samples); 10\% in the amplification study \\
+Architectures & ResNet-18, VGG-16-BN (CIFAR variants) \\
+Optimiser & SGD, momentum 0.9 (Nesterov), weight decay $5\times10^{-4}$ \\
+Schedule & OneCycleLR, max lr 0.1 (VGG 0.05), 12 epochs, batch 512 \\
+Augmentation & random crop 32$\to$28 with padding 4, horizontal flip; normalisation inside the model \\
+Seeds & 0, 1, 2 (identical splits; poison placement and init vary) \\
+Detectors & Activation Clustering; Spectral Signatures (per-class, PCA/2-means resp.\ top singular vector) \\
+Forget set & $\mathcal{F}(r,p)$: $N_p r$ true poison $+$ $N_p r(1-p)/p$ clean non-target false positives \\
+Defence success & ASR $\leq5\%$ \emph{and} clean accuracy within 2 points of the gold retrain \\
+Hardware & Kaggle 2$\times$T4 (16 GB each), mixed precision; $\approx$23 GPU-hours total \\
+\bottomrule
+\end{tabular}
+\end{table}

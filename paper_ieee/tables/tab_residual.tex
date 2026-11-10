@@ -1,0 +1,18 @@
+\begin{table}[t]
+\centering
+\caption{E2: the cliff is a step function of residual poison, not of the amount deleted.}
+\label{tab:residual}
+\footnotesize
+\setlength{\tabcolsep}{4.5pt}
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Setting} & \textbf{0\%} & \textbf{25\%} & \textbf{50\%} & \textbf{75\%} & \textbf{100\%} & \textbf{Gold} \\
+\midrule
+R18/BadNets & 99.83 & 99.98 & 99.94 & 100.00 & 1.21 & 90.3 \\
+R18/Blend & 99.99 & 99.97 & 99.97 & 99.86 & 0.64 & 90.2 \\
+VGG/BadNets & 100.00 & 99.99 & 100.00 & 100.00 & 1.22 & 89.7 \\
+VGG/Blend & 99.97 & 100.00 & 99.94 & 99.98 & 0.59 & 89.7 \\
+\bottomrule
+\end{tabular}
+\par\vspace{1pt}\footnotesize\raggedright ASR (\%) versus the fraction of poison left in the training set after deletion. The last column is the gold retrain's clean accuracy for that setting; across the five residual fractions, clean accuracy varies by at most 0.9 points in every setting, so the cliff is not an accuracy artefact.
+\end{table}

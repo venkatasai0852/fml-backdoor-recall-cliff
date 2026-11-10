@@ -1,0 +1,97 @@
+person,exp,arch,attack,rate,seed,recall,precision,n_forget,method,detector,clean_acc,asr,auc,tpr_at_fpr10,prec_at_fpr10,n_flags,n_true_in_flags,time_sec,notes
+sai,E1,resnet18,badnets,0.05,0,1.0,1.0,2500,poisoned,ss,,,0.987,0.9664,0.8285,3750,2396,,
+sai,E1,resnet18,badnets,0.05,0,1.0,1.0,2500,poisoned,ac,,,,,,2500,2500,,
+sai,E1,resnet18,badnets,0.05,0,1.0,1.0,2500,nc_style,none,88.45,17.9,,,,,,94.2018,inoculation only; F-independent
+sai,E1,resnet18,badnets,0.05,0,1.0,1.0,2500,retrain_delF,none,88.59,1.41,,,,,,428.0156,
+sai,E1,resnet18,badnets,0.05,0,1.0,1.0,2500,finetune_retain,none,89.12,100.0,,,,,,105.755,
+sai,E1,resnet18,badnets,0.05,0,1.0,1.0,2500,negrad_plus,none,75.04,0.0,,,,,,26.8496,
+sai,E1,resnet18,badnets,0.05,0,1.0,1.0,2500,scrub,none,57.05,100.0,,,,,,223.2007,
+sai,E1,resnet18,badnets,0.05,0,1.0,1.0,2500,recipe,none,88.21,0.4,,,,,,65.2437,
+sai,E1,resnet18,badnets,0.05,0,0.95,1.0,2375,retrain_delF,none,84.97,3.53,,,,,,427.37,
+sai,E1,resnet18,badnets,0.05,0,0.95,1.0,2375,finetune_retain,none,89.11,100.0,,,,,,106.0553,
+sai,E1,resnet18,badnets,0.05,0,0.95,1.0,2375,negrad_plus,none,75.47,0.0,,,,,,15.5372,
+sai,E1,resnet18,badnets,0.05,0,0.95,1.0,2375,scrub,none,81.21,100.0,,,,,,223.3385,
+sai,E1,resnet18,badnets,0.05,0,0.95,1.0,2375,recipe,none,88.0,0.9,,,,,,65.0944,
+sai,E1,resnet18,badnets,0.05,0,0.9,1.0,2250,retrain_delF,none,88.76,100.0,,,,,,429.6937,
+sai,E1,resnet18,badnets,0.05,0,0.9,1.0,2250,finetune_retain,none,89.35,100.0,,,,,,106.657,
+sai,E1,resnet18,badnets,0.05,0,0.9,1.0,2250,negrad_plus,none,75.31,0.0,,,,,,15.8451,
+sai,E1,resnet18,badnets,0.05,0,0.9,1.0,2250,scrub,none,81.93,100.0,,,,,,225.5047,
+sai,E1,resnet18,badnets,0.05,0,0.9,1.0,2250,recipe,none,88.19,0.8,,,,,,65.142,
+sai,E1,resnet18,badnets,0.05,0,0.75,1.0,1875,retrain_delF,none,88.89,99.81,,,,,,432.658,
+sai,E1,resnet18,badnets,0.05,0,0.75,1.0,1875,finetune_retain,none,89.42,99.99,,,,,,107.1761,
+sai,E1,resnet18,badnets,0.05,0,0.75,1.0,1875,negrad_plus,none,77.23,0.0,,,,,,14.7378,
+sai,E1,resnet18,badnets,0.05,0,0.75,1.0,1875,scrub,none,79.49,100.0,,,,,,227.0744,
+sai,E1,resnet18,badnets,0.05,0,0.75,1.0,1875,recipe,none,88.07,1.9,,,,,,64.8963,
+sai,E1,resnet18,badnets,0.05,0,0.5,1.0,1250,retrain_delF,none,89.01,99.99,,,,,,440.2649,
+sai,E1,resnet18,badnets,0.05,0,0.5,1.0,1250,finetune_retain,none,89.28,100.0,,,,,,108.8439,
+sai,E1,resnet18,badnets,0.05,0,0.5,1.0,1250,negrad_plus,none,81.37,0.03,,,,,,13.9785,
+sai,E1,resnet18,badnets,0.05,0,0.5,1.0,1250,scrub,none,84.01,100.0,,,,,,229.7558,
+sai,E1,resnet18,badnets,0.05,0,0.5,1.0,1250,recipe,none,87.83,3.07,,,,,,64.5286,
+sai,E1,resnet18,badnets,0.05,0,0.25,1.0,625,retrain_delF,none,88.67,99.98,,,,,,445.4599,
+sai,E1,resnet18,badnets,0.05,0,0.25,1.0,625,finetune_retain,none,89.43,99.96,,,,,,110.1779,
+sai,E1,resnet18,badnets,0.05,0,0.25,1.0,625,negrad_plus,none,86.31,0.61,,,,,,12.5014,
+sai,E1,resnet18,badnets,0.05,0,0.25,1.0,625,scrub,none,85.19,100.0,,,,,,232.8184,
+sai,E1,resnet18,badnets,0.05,0,0.25,1.0,625,recipe,none,87.42,4.69,,,,,,64.196,
+sai,E1,resnet18,badnets,0.05,0,0.9,0.9,2500,retrain_delF,none,88.75,100.0,,,,,,415.9124,
+sai,E1,resnet18,badnets,0.05,0,0.9,0.9,2500,finetune_retain,none,89.35,100.0,,,,,,105.6642,
+sai,E1,resnet18,badnets,0.05,0,0.9,0.9,2500,negrad_plus,none,76.01,0.0,,,,,,4.993,
+sai,E1,resnet18,badnets,0.05,0,0.9,0.9,2500,scrub,none,87.09,100.0,,,,,,212.3156,
+sai,E1,resnet18,badnets,0.05,0,0.9,0.9,2500,recipe,none,87.79,0.69,,,,,,65.0149,
+sai,E1,resnet18,badnets,0.05,0,0.9,0.7001,3214,retrain_delF,none,88.64,100.0,,,,,,423.2028,
+sai,E1,resnet18,badnets,0.05,0,0.9,0.7001,3214,finetune_retain,none,89.44,100.0,,,,,,104.2362,
+sai,E1,resnet18,badnets,0.05,0,0.9,0.7001,3214,negrad_plus,none,75.41,0.0,,,,,,17.4752,
+sai,E1,resnet18,badnets,0.05,0,0.9,0.7001,3214,scrub,none,87.98,100.0,,,,,,222.1542,
+sai,E1,resnet18,badnets,0.05,0,0.9,0.7001,3214,recipe,none,88.11,1.64,,,,,,65.7136,
+sai,E1,resnet18,badnets,0.05,0,0.5,0.8999,1389,retrain_delF,none,88.78,99.59,,,,,,437.4035,
+sai,E1,resnet18,badnets,0.05,0,0.5,0.8999,1389,finetune_retain,none,89.32,99.98,,,,,,108.815,
+sai,E1,resnet18,badnets,0.05,0,0.5,0.8999,1389,negrad_plus,none,82.68,0.03,,,,,,13.8993,
+sai,E1,resnet18,badnets,0.05,0,0.5,0.8999,1389,scrub,none,85.83,100.0,,,,,,229.4742,
+sai,E1,resnet18,badnets,0.05,0,0.5,0.8999,1389,recipe,none,88.32,3.14,,,,,,64.5966,
+sai,E1,resnet18,badnets,0.05,0,0.5,0.6999,1786,retrain_delF,none,88.61,99.73,,,,,,434.9505,
+sai,E1,resnet18,badnets,0.05,0,0.5,0.6999,1786,finetune_retain,none,89.23,100.0,,,,,,108.0243,
+sai,E1,resnet18,badnets,0.05,0,0.5,0.6999,1786,negrad_plus,none,81.65,0.01,,,,,,14.2288,
+sai,E1,resnet18,badnets,0.05,0,0.5,0.6999,1786,scrub,none,87.83,100.0,,,,,,228.4305,
+sai,E1,resnet18,badnets,0.05,0,0.5,0.6999,1786,recipe,none,87.5,2.26,,,,,,64.7601,
+sai,E9,resnet18,badnets,0.1,0,0.5,1.0,2500,base,ss,89.1,99.99,0.4937,0.1036,,2500,1038,,"AUC=missed-vs-clean0, topk_missed_recall=0.208"
+sai,E9,resnet18,badnets,0.1,0,0.5,1.0,2500,partial_repair_lr0.005_ep2,ss,88.2,11.07,0.4704,0.1276,,2500,192,,"AUC=missed-vs-clean0, topk_missed_recall=0.038"
+sai,E9,resnet18,badnets,0.1,0,0.5,1.0,2500,partial_repair_lr0.01_ep1,ss,86.81,33.03,0.4683,0.0576,,2500,152,,"AUC=missed-vs-clean0, topk_missed_recall=0.032"
+sai,E9,resnet18,badnets,0.1,0,0.5,1.0,2500,ctrl_clean_lr0.005_ep2,ss,87.82,99.98,0.4921,0.1948,,2500,1323,,"AUC=missed-vs-clean0, topk_missed_recall=0.256"
+sai,E9,resnet18,badnets,0.1,0,0.5,1.0,2500,ctrl_clean_lr0.01_ep1,ss,87.26,99.98,0.4953,0.1852,,2500,1350,,"AUC=missed-vs-clean0, topk_missed_recall=0.266"
+sai,E9,resnet18,badnets,0.1,1,0.5,1.0,2500,base,ss,88.65,99.99,0.499,0.1172,,2500,1023,,"AUC=missed-vs-clean0, topk_missed_recall=0.210"
+sai,E9,resnet18,badnets,0.1,1,0.5,1.0,2500,partial_repair_lr0.005_ep2,ss,88.09,15.87,0.497,0.0116,,2500,62,,"AUC=missed-vs-clean0, topk_missed_recall=0.012"
+sai,E9,resnet18,badnets,0.1,1,0.5,1.0,2500,partial_repair_lr0.01_ep1,ss,86.93,17.69,0.4763,0.0308,,2500,127,,"AUC=missed-vs-clean0, topk_missed_recall=0.028"
+sai,E9,resnet18,badnets,0.1,1,0.5,1.0,2500,ctrl_clean_lr0.005_ep2,ss,87.69,100.0,0.499,0.2316,,2500,1463,,"AUC=missed-vs-clean0, topk_missed_recall=0.299"
+sai,E9,resnet18,badnets,0.1,1,0.5,1.0,2500,ctrl_clean_lr0.01_ep1,ss,87.43,100.0,0.5027,0.2264,,2500,1470,,"AUC=missed-vs-clean0, topk_missed_recall=0.301"
+sai,E9,resnet18,badnets,0.1,2,0.5,1.0,2500,base,ss,88.64,100.0,0.4964,0.1236,,2500,1079,,"AUC=missed-vs-clean0, topk_missed_recall=0.212"
+sai,E9,resnet18,badnets,0.1,2,0.5,1.0,2500,partial_repair_lr0.005_ep2,ss,88.06,21.26,0.487,0.066,,2500,84,,"AUC=missed-vs-clean0, topk_missed_recall=0.016"
+sai,E9,resnet18,badnets,0.1,2,0.5,1.0,2500,partial_repair_lr0.01_ep1,ss,87.35,29.6,0.4995,0.0172,,2500,20,,"AUC=missed-vs-clean0, topk_missed_recall=0.003"
+sai,E9,resnet18,badnets,0.1,2,0.5,1.0,2500,ctrl_clean_lr0.005_ep2,ss,87.51,99.99,0.5013,0.216,,2500,1351,,"AUC=missed-vs-clean0, topk_missed_recall=0.278"
+sai,E9,resnet18,badnets,0.1,2,0.5,1.0,2500,ctrl_clean_lr0.01_ep1,ss,86.66,99.94,0.5013,0.1992,,2500,1276,,"AUC=missed-vs-clean0, topk_missed_recall=0.261"
+sai,E3,resnet18,badnets,0.05,0,1.0,0.3333,7500,car_proxy,ss,82.32,99.78,,,,,,,theta=0.0101 tau=97.5 f1=0.500 iou=0.000 t=64s
+sai,E3,resnet18,badnets,0.05,0,1.0,0.3519,7105,car_proxy,ss,86.7,100.0,,,,,,,theta=9.9049 tau=100.0 f1=0.521 iou=0.000 t=76s
+sai,E3,resnet18,badnets,0.05,0,1.0,0.3725,6711,car_proxy,ss,87.5,100.0,,,,,,,theta=15.7989 tau=100.0 f1=0.543 iou=0.000 t=77s
+sai,E3,resnet18,badnets,0.05,0,1.0,0.3958,6317,car_proxy,ss,88.01,100.0,,,,,,,theta=20.7126 tau=100.0 f1=0.567 iou=0.000 t=78s
+sai,E3,resnet18,badnets,0.05,0,0.9992,0.4218,5922,car_proxy,ss,88.07,100.0,,,,,,,theta=26.1152 tau=100.0 f1=0.593 iou=0.000 t=76s
+sai,E3,resnet18,badnets,0.05,0,0.9992,0.4519,5528,car_proxy,ss,88.21,100.0,,,,,,,theta=30.9248 tau=100.0 f1=0.622 iou=0.000 t=80s
+sai,E3,resnet18,badnets,0.05,0,0.998,0.486,5134,car_proxy,ss,88.77,100.0,,,,,,,theta=35.3257 tau=100.0 f1=0.654 iou=0.000 t=81s
+sai,E3,resnet18,badnets,0.05,0,0.9976,0.5263,4739,car_proxy,ss,88.66,100.0,,,,,,,theta=39.9323 tau=100.0 f1=0.689 iou=0.000 t=81s
+sai,E3,resnet18,badnets,0.05,0,0.9944,0.5722,4345,car_proxy,ss,88.72,100.0,,,,,,,theta=44.8566 tau=100.0 f1=0.726 iou=0.000 t=81s
+sai,E3,resnet18,badnets,0.05,0,0.9924,0.6279,3951,car_proxy,ss,88.88,100.0,,,,,,,theta=50.2327 tau=100.0 f1=0.769 iou=0.000 t=81s
+sai,E3,resnet18,badnets,0.05,0,0.9884,0.6947,3557,car_proxy,ss,88.99,100.0,,,,,,,theta=56.2020 tau=100.0 f1=0.816 iou=0.000 t=83s
+sai,E3,resnet18,badnets,0.05,0,0.9772,0.7726,3162,car_proxy,ss,89.06,100.0,,,,,,,theta=64.0902 tau=100.0 f1=0.863 iou=0.000 t=84s
+sai,E3,resnet18,badnets,0.05,0,0.9556,0.8631,2768,car_proxy,ss,89.19,100.0,,,,,,,theta=74.2327 tau=100.0 f1=0.907 iou=0.000 t=84s
+sai,E3,resnet18,badnets,0.05,0,0.8944,0.9419,2374,car_proxy,ss,88.76,100.0,,,,,,,theta=89.3113 tau=100.0 f1=0.918 iou=0.000 t=82s
+sai,E3,resnet18,badnets,0.05,0,0.7836,0.9899,1979,car_proxy,ss,89.23,100.0,,,,,,,theta=108.4029 tau=100.0 f1=0.875 iou=0.000 t=85s
+sai,E3,resnet18,badnets,0.05,0,0.6332,0.9987,1585,car_proxy,ss,89.2,100.0,,,,,,,theta=127.7054 tau=100.0 f1=0.775 iou=0.000 t=86s
+sai,E3,resnet18,badnets,0.05,0,0.476,0.9992,1191,car_proxy,ss,89.14,100.0,,,,,,,theta=145.5339 tau=100.0 f1=0.645 iou=0.000 t=87s
+sai,E3,resnet18,badnets,0.05,0,0.3188,1.0,797,car_proxy,ss,89.21,99.98,,,,,,,theta=166.5847 tau=100.0 f1=0.483 iou=0.000 t=87s
+sai,E3,resnet18,badnets,0.05,0,0.1608,1.0,402,car_proxy,ss,89.29,99.98,,,,,,,theta=191.7153 tau=100.0 f1=0.277 iou=0.000 t=87s
+sai,E3,resnet18,badnets,0.05,0,0.0032,1.0,8,car_proxy,ss,89.22,99.98,,,,,,,theta=291.8300 tau=100.0 f1=0.006 iou=0.000 t=88s
+sai,E3,resnet18,badnets,0.05,0,0.8944,0.9419,2374,f1_full,ss,86.71,99.97,,,,,,423.6229,theta=89.3113 proxy_tau=100.0 f1=0.918
+sai,E6,resnet18,badnets,0.05,0,1.0,1.0,2500,retrain_delF,none,88.7,1.62,,,,,,419.5659,"raw ac flags; det_rows={'flagged': 2500, 'true_poison': 2500, 'precision': 1.0, 'recall': 1.0}"
+sai,E6,resnet18,badnets,0.05,0,1.0,1.0,2500,scrub,none,61.37,100.0,,,,,,212.1333,"raw ac flags; det_rows={'flagged': 2500, 'true_poison': 2500, 'precision': 1.0, 'recall': 1.0}"
+sai,E6,resnet18,badnets,0.05,0,1.0,1.0,2500,recipe,none,88.04,0.7,,,,,,64.9481,"raw ac flags; det_rows={'flagged': 2500, 'true_poison': 2500, 'precision': 1.0, 'recall': 1.0}"
+sai,E6,resnet18,badnets,0.05,0,0.8336,0.8336,2500,retrain_delF,none,88.89,99.87,,,,,,413.6944,"raw ss flags; det_rows={'flagged': 2500, 'true_poison': 2500, 'precision': 0.8336, 'recall': 0.8336}"
+sai,E6,resnet18,badnets,0.05,0,0.8336,0.8336,2500,scrub,none,86.89,100.0,,,,,,212.5927,"raw ss flags; det_rows={'flagged': 2500, 'true_poison': 2500, 'precision': 0.8336, 'recall': 0.8336}"
+sai,E6,resnet18,badnets,0.05,0,0.8336,0.8336,2500,recipe,none,88.18,1.43,,,,,,64.9182,"raw ss flags; det_rows={'flagged': 2500, 'true_poison': 2500, 'precision': 0.8336, 'recall': 0.8336}"
+sai,E7b,resnet18,badnets,0.05,0,1.0,1.0,2500,nc_synth,none,87.67,98.99,,,,,,70.1447,"synth trigger, IoU=0.000"

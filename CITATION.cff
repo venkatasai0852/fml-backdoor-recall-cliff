@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you use this code, data, or manuscript, please cite the work below."
+type: software
+title: "When the Detector Is Wrong: A Controlled Study of Post-Training Backdoor Removal Under Imperfect Recall"
+abstract: >-
+  Code, frozen result tables, notebook generators, and IEEEtran manuscript
+  source for a controlled study of post-training backdoor removal under
+  imperfect detector recall. The study sweeps forget-set recall and precision,
+  measures five removal families, and reports a deletion cliff at full recall,
+  a bounded tolerance for trigger-aware repair, two failed refinements, a
+  batch-norm artefact in feature-space ascent, durability probes, and a RadioML
+  replication.
+repository-code: "https://github.com/venkatasai0852/fml-backdoor-recall-cliff"
+authors:
+  - family-names: "Thota"
+    given-names: "Venkata Sai"
+  - family-names: "Sarang"
+    given-names: "N S"
+  - family-names: "Tiwari"
+    given-names: "Divyansh"
+  - family-names: "Mandali"
+    given-names: "Urja"
+year: 2026
+month: 11
+license: MIT
+keywords:
+  - backdoor defense
+  - data poisoning
+  - machine unlearning
+  - detector recall
+  - RadioML

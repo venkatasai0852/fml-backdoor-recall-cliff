@@ -1,0 +1,28 @@
+person,exp,arch,attack,rate,seed,recall,precision,n_forget,method,detector,clean_acc,asr,auc,tpr_at_fpr10,prec_at_fpr10,n_flags,n_true_in_flags,time_sec,notes
+sarang,E1,resnet18,badnets,0.05,1,1.0,1.0,2500,base_eval,none,88.75,99.98,,,,,,424.886,poisoned base model; seed 1; Table 1 starting point
+sarang,E1,resnet18,badnets,0.05,1,1.0,1.0,2500,negrad_plus,none,88.6,100.0,,,,,,92.2182,"v2 fix: one pass over retain/epoch, OneCycle, BN stats from retain only"
+sarang,E1,resnet18,badnets,0.05,1,1.0,1.0,2500,scrub,none,88.83,100.0,,,,,,205.9474,"v2 fix: one pass over retain/epoch, OneCycle, BN stats from retain only"
+sarang,E1,resnet18,badnets,0.05,1,0.95,1.0,2375,negrad_plus,none,88.57,100.0,,,,,,90.5667,"v2 fix: one pass over retain/epoch, OneCycle, BN stats from retain only"
+sarang,E1,resnet18,badnets,0.05,1,0.95,1.0,2375,scrub,none,89.02,100.0,,,,,,205.6501,"v2 fix: one pass over retain/epoch, OneCycle, BN stats from retain only"
+sarang,E1,resnet18,badnets,0.05,1,0.9,1.0,2250,negrad_plus,none,88.76,100.0,,,,,,90.8449,"v2 fix: one pass over retain/epoch, OneCycle, BN stats from retain only"
+sarang,E1,resnet18,badnets,0.05,1,0.9,1.0,2250,scrub,none,88.93,100.0,,,,,,206.6164,"v2 fix: one pass over retain/epoch, OneCycle, BN stats from retain only"
+sarang,E1,resnet18,badnets,0.05,1,0.75,1.0,1875,negrad_plus,none,88.84,100.0,,,,,,92.2591,"v2 fix: one pass over retain/epoch, OneCycle, BN stats from retain only"
+sarang,E1,resnet18,badnets,0.05,1,0.75,1.0,1875,scrub,none,88.75,100.0,,,,,,208.0217,"v2 fix: one pass over retain/epoch, OneCycle, BN stats from retain only"
+sarang,E1,resnet18,badnets,0.05,1,0.5,1.0,1250,negrad_plus,none,88.79,100.0,,,,,,92.8599,"v2 fix: one pass over retain/epoch, OneCycle, BN stats from retain only"
+sarang,E1,resnet18,badnets,0.05,1,0.5,1.0,1250,scrub,none,88.92,100.0,,,,,,210.8222,"v2 fix: one pass over retain/epoch, OneCycle, BN stats from retain only"
+sarang,E1,resnet18,badnets,0.05,1,0.25,1.0,625,negrad_plus,none,88.98,100.0,,,,,,94.2327,"v2 fix: one pass over retain/epoch, OneCycle, BN stats from retain only"
+sarang,E1,resnet18,badnets,0.05,1,0.25,1.0,625,scrub,none,88.98,100.0,,,,,,213.2617,"v2 fix: one pass over retain/epoch, OneCycle, BN stats from retain only"
+sarang,E1,resnet18,badnets,0.05,1,0.9,0.9,2500,negrad_plus,none,10.0,100.0,,,,,,83.2352,"v2 fix: one pass over retain/epoch, OneCycle, BN stats from retain only"
+sarang,E1,resnet18,badnets,0.05,1,0.9,0.9,2500,scrub,none,89.02,100.0,,,,,,203.8641,"v2 fix: one pass over retain/epoch, OneCycle, BN stats from retain only"
+sarang,E1,resnet18,badnets,0.05,1,0.9,0.7001,3214,negrad_plus,none,10.0,100.0,,,,,,82.3781,"v2 fix: one pass over retain/epoch, OneCycle, BN stats from retain only"
+sarang,E1,resnet18,badnets,0.05,1,0.9,0.7001,3214,scrub,none,89.02,100.0,,,,,,202.7451,"v2 fix: one pass over retain/epoch, OneCycle, BN stats from retain only"
+sarang,E1,resnet18,badnets,0.05,1,0.5,0.8999,1389,negrad_plus,none,10.0,100.0,,,,,,87.3113,"v2 fix: one pass over retain/epoch, OneCycle, BN stats from retain only"
+sarang,E1,resnet18,badnets,0.05,1,0.5,0.8999,1389,scrub,none,89.05,100.0,,,,,,210.8451,"v2 fix: one pass over retain/epoch, OneCycle, BN stats from retain only"
+sarang,E1,resnet18,badnets,0.05,1,0.5,0.6999,1786,negrad_plus,none,10.0,100.0,,,,,,84.6456,"v2 fix: one pass over retain/epoch, OneCycle, BN stats from retain only"
+sarang,E1,resnet18,badnets,0.05,1,0.5,0.6999,1786,scrub,none,88.77,100.0,,,,,,208.985,"v2 fix: one pass over retain/epoch, OneCycle, BN stats from retain only"
+sarang,E8,resnet18,badnets,0.05,1,0.5,1.0,1250,ascent_lr0.0002_ep2,none,88.74,99.98,,,,,,4.3345,BN-guarded ascent (6 steps); feature_norm=17.0
+sarang,E8,resnet18,badnets,0.05,1,0.5,1.0,1250,ascent_lr0.0005_ep2,none,88.72,99.98,,,,,,3.0795,BN-guarded ascent (6 steps); feature_norm=17.0
+sarang,E8,resnet18,badnets,0.05,1,0.5,1.0,1250,ascent_lr0.001_ep2,none,88.72,99.97,,,,,,3.0742,BN-guarded ascent (6 steps); feature_norm=17.0
+sarang,E8,resnet18,badnets,0.05,1,0.5,1.0,1250,ascent_lr0.001_ep4,none,88.73,99.94,,,,,,3.8481,BN-guarded ascent (12 steps); feature_norm=17.0
+sarang,E8,resnet18,badnets,0.05,1,0.5,1.0,1250,repair_lr0.005_ep2,none,87.94,8.63,,,,,,43.943,label-repair alternative; feature_norm=16.6
+sarang,E8,resnet18,badnets,0.05,1,0.5,1.0,1250,repair_lr0.01_ep1,none,87.45,15.11,,,,,,26.143,label-repair alternative; feature_norm=16.9

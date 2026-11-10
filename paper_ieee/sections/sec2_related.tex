@@ -1,0 +1,154 @@
+\section{Related Work}
+\label{sec:related}
+
+\subsection{Backdoor Attacks}
+Backdoor poisoning was established by Gu \etal{} with BadNets, a small
+checkerboard patch stamped onto a fraction of training images and relabelled to a
+target class \cite{badnets}. Liu \etal{} showed that the same effect can be
+obtained by perturbing weights rather than data \cite{trojannn}, and Chen \etal{}
+gave an early data-poisoning formulation with a learned trigger
+\cite{blendattack}. Later work made the trigger stealthier: clean-label attacks
+that require no label change \cite{cleanlabel}, hidden-trigger attacks that
+optimise the poisoned input to be far from the trigger at test time
+\cite{hidden}, warping-based triggers \cite{wanet}, learnable and imperceptible
+triggers \cite{lira}, input-aware triggers \cite{inputaware}, and physically
+realisable triggers \cite{physical}. In federated learning, a single malicious
+client can inject a backdoor that survives aggregation
+\cite{bagdasaryan,bhagoji,dba}. Surveys by Li \etal{} \cite{survey} and Goldblum
+\etal{} \cite{goldblum} organise this space and stress that defence evaluation
+is fragmented.
+
+Backdoor poisoning is a special case of data poisoning, which has a longer
+history: support-vector poisoning \cite{biggio}, certified defences against
+poisoning \cite{steinhardt_cert}, poisoning of regression learning
+\cite{jagielski}, and attacks that break data sanitization at scale
+\cite{kohpoison}, including gradient-matching poisons that transfer across
+models \cite{witchesbrew}. The lesson of that line of work, that a defence tuned
+to one poisoning strength can fail at another, motivates the sweep over recall
+and precision here.
+
+The design space has since widened well beyond dirty-label patches: clean-label
+poisoning of feature extractors \cite{poisonfrogs}, subpopulation poisoning
+\cite{subpop}, frequency-domain triggers \cite{freq}, reflection triggers
+\cite{reflection}, dynamic triggers \cite{dynamic}, and latent backdoors
+\cite{latent}; contrastive encoders \cite{carlinicl}; and instruction-tuned
+language models \cite{poisonllm}. Data-sanitization defences can themselves be
+evaded by stronger poisoning \cite{kohpoison}, and BackdoorBench consolidates
+implementations and evaluation protocols across this space
+\cite{backdoorbench}.
+
+Our threat model is the simplest and most studied one: an attacker controls a
+fraction of a static training set and stamps a fixed, visible trigger. We use two
+instances, a $4\times4$ checkerboard and a blended pattern, precisely because
+they are canonical. The contribution of this paper is not a new attack but the
+measurement of what happens after one is detected imperfectly.
+
+\subsection{Detection}
+Detection methods score inputs, features, or model parameters. Neural Cleanse
+optimises a minimal trigger per class and flags a class whose trigger is
+anomalously small \cite{nc}. ABS stimulates neurons and observes whether a
+single output class dominates \cite{abs}. STRIP perturbs inputs with
+superimposed patterns and measures prediction entropy \cite{strip}. Activation
+clustering projects per-class activations and separates them into two clusters
+\cite{ac}, and spectral signatures analyses the top singular direction of
+per-class representations \cite{ss}. Fine-pruning observes that backdoored
+neurons are dormant on clean inputs and prunes them \cite{finepruning}.
+Post-training scanners continue to broaden coverage; MM-BD, for example, scores
+classes by a maximum-margin statistic and does not assume a patch-shaped
+trigger \cite{mmbd}.
+
+All of these methods trade missed detections against false positives, and their
+operating points depend on poison rate, architecture, and attack. Detection is
+therefore not a preprocessing detail that can be assumed away: it defines the
+input to the removal stage. Recent defences continue to improve the detector
+side, including variational formulations that jointly model trigger and
+class-conditional structure \cite{seal}. Our study is complementary: we take
+detector output as given and ask how much of its error the removal stage can
+absorb. To keep the manipulation interpretable we parameterise that output by
+recall and precision rather than by a detector-specific threshold, and we anchor
+the parameterisation to two real detectors in Section~\ref{sec:cliff}.
+
+\subsection{Removal and Unlearning}
+The gold standard for removal is retraining on the retained data
+\cite{badnets,finepruning}. Because full retraining is expensive, a large
+literature approximates it. SISA shards the training set, trains a constituent
+model per shard, and unlearns by retraining only the affected shards
+\cite{sisa}. Amnesiac unlearns by ascending the loss on the forget set
+\cite{amnesiac}, Eternal Sunshine approximates the retrained weights in a
+quadratic Fisher sense \cite{eternal}, and certified removal provides a
+differential-privacy-style guarantee for convex or strongly convex models
+\cite{certified}. SCRUB trains a student to match the teacher on the retain set
+while disagreeing on the forget set \cite{scrub}. Influence functions and
+gradient tracing estimate which training points mattered and can be used to
+down-weight them \cite{influence,tracin}, and example-forgetting scores have been
+proposed as a way to choose which points a model should forget \cite{toneva}.
+Suriyakumar and Wilson characterise
+the limits of approximate-removal guarantees \cite{limits}. Surveys of machine
+unlearning \cite{unlearnsurvey} and domain-specific benchmarks
+\cite{tofu,wmdp} have grown around this literature, and what an unlearning claim
+should certify is now a central question for language models
+\cite{unlearnllm}.
+
+A parallel family acts during or immediately after training rather than on a
+forget set: anti-backdoor learning separates poison from clean data while
+training \cite{abl}, decoupled training withholds the trigger association from
+the feature extractor \cite{decouple}, adversarial neuron pruning removes
+trigger-sensitive units \cite{anp}, and attention distillation fine-tunes the
+backdoored model on clean data \cite{nad}. Trigger-reverse-engineering scanners
+reconstruct a candidate trigger before removal \cite{tabor}. These methods
+reduce the need for an exact forget set, but each still needs either clean data,
+a clean reference model, or a reconstructed trigger; none is evaluated under a
+forget set whose recall is known to be below one.
+
+Closest to our recipe are methods that edit the association rather than delete
+the data. Zhao and Wressnegger study the symmetry between learning a backdoor
+and removing one \cite{twosides}. Repair-based pipelines relabel flagged samples
+and fine-tune, optionally with an inoculation step that presents the trigger
+with its correct label. These methods are attractive under imperfect detection
+because they do not require the forget set to be exact, but their inoculation
+step needs the trigger. We quantify both sides of that trade: the tolerance the
+recipe buys, and the knowledge it consumes.
+
+Two 2025 results shape our interpretation. Pawelczyk \etal{} show that
+approximate unlearning methods, including methods designed for large language
+models, fail to remove the effect of poisoned data even when they appear to
+succeed on standard unlearning metrics \cite{pawelczyk}. Hu \etal{} show that
+benign relearning restores supposedly unlearned behaviour \cite{jogging}, and
+the same persistence under benign retraining has been observed in language
+models trained to exhibit deceptive behaviour \cite{sleeper}. Our
+durability study is a vision-domain analogue of the second result, and our
+overall conclusion is consistent with the first: unlearning metrics that do not
+probe the attack after removal can be misleading.
+
+\subsection{Evaluation Under Imperfect Detection}
+The gap we address is evaluative. Removal papers usually construct the forget
+set from ground-truth poison labels, or from a detector threshold that is tuned
+until recall is perfect. Detector papers report recall and precision but stop
+before removal. Studies that connect the two usually vary a single threshold and
+report a single operating point, which makes it hard to separate the effect of
+missed poison from the effect of deleted clean data. Controlled manipulation of
+both quantities, across method families and across domains, is what our grid
+provides. The tolerance $\rstar$ is intended as a reusable summary: it answers
+``how good must the detector be for this removal method to work?'' in the same
+units for every method.
+
+\subsection{Calibration and Risk Control}
+Calibrate-then-Remove, one of the two refinements we test, borrows the logic of
+distribution-free risk control. Conformal prediction converts a score into a
+prediction set with a user-specified coverage guarantee under exchangeability
+\cite{vovk,angelopoulos}, and conformal risk control extends the guarantee from
+coverage to an arbitrary bounded loss \cite{crc}. The same machinery can in
+principle choose a removal threshold that controls the risk of a live backdoor. The
+guarantee depends on a proxy that is exchangeable with the test trigger. Our
+experiment tests whether a synthesised trigger can serve as that proxy; the
+answer, on both attacks, is no.
+
+\subsection{Positioning}
+This paper is a measurement study with one attempted mechanism and an explicit
+negative result. It does not claim a new attack, a new detector, or a deployable
+defence. Its contributions are the controlled forget-set construction, the
+recall cliff and its transfer across architectures and attacks, the tolerance
+metric $\rstar$, the demonstration that trigger synthesis breaks the only method
+that tolerates imperfect recall, and the replication of the cliff in a radio
+modulation task. The repair recipe we study is a strong baseline and an upper
+bound; we label it as such wherever it appears.

@@ -1,0 +1,18 @@
+\begin{table*}[t]
+\centering
+\caption{Defence-success counts and the recall tolerance $r^{*}$.}
+\label{tab:success}
+\scriptsize
+\begin{tabular}{lccccccccccc}
+\toprule
+\textbf{Method} & \multicolumn{10}{c}{\textbf{Successes (of 3) per $(r,p)$ cell, ordered as in Table~\ref{tab:e1grid}}} & \textbf{$\rstar$} \\
+\midrule
+Retrain$_{\setminus F}$ & 3 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1.00 \\
+Fine-tune & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & -- \\
+NegGrad+ & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & -- \\
+SCRUB & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & -- \\
+Recipe & 3 & 3 & 3 & 3 & 2 & 2 & 3 & 3 & 3 & 3 & 0.50 \\
+\bottomrule
+\end{tabular}
+\par\vspace{1pt}\scriptsize\raggedright Number of seeds (of 3) meeting both criteria (ASR $\leq5\%$ and clean accuracy within 2 points of the gold retrain), in the order of Table~\ref{tab:e1grid}. $\rstar$ is the smallest $p{=}1$ recall at which the three-seed mean meets both criteria (Eq.~\eqref{eq:rstar}); the counts allow the stricter all-seeds rule to be read off, and under it the recipe's tolerance would be $0.75$. At $(0.5,1.0)$ the recipe's mean clean accuracy is $87.37\%$ against a gold mean of $88.67\%$, inside the budget, although one seed misses it by $0.09$ points. Gold clean accuracy: 88.59 / 88.65 / 88.77.
+\end{table*}

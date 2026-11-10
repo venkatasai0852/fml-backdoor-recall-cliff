@@ -1,0 +1,18 @@
+\begin{table}[t]
+\centering
+\caption{Cross-domain replication on RadioML AMC.}
+\label{tab:rf}
+\footnotesize
+\setlength{\tabcolsep}{4.5pt}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Method} & \textbf{$r{=}1.0$} & \textbf{$r{=}0.75$} & \textbf{$r{=}0.5$} & \textbf{Clean acc} \\
+\midrule
+Deletion & 2.90$\pm$1.43 & 97.16$\pm$1.84 & 98.41$\pm$2.18 & 56.75$\pm$0.79 \\
+Fine-tune & 73.87$\pm$2.33 & 99.48$\pm$0.35 & 99.66$\pm$0.14 & 58.55$\pm$0.38 \\
+Recipe & 0.83$\pm$0.17 & 2.35$\pm$0.43 & 4.02$\pm$0.86 & 57.36$\pm$0.50 \\
+Inoc. only & 0.28$\pm$0.05 & 1.60$\pm$0.23 & 3.83$\pm$0.23 & 58.40$\pm$0.30 \\
+\bottomrule
+\end{tabular}
+\par\vspace{1pt}\footnotesize\raggedright RadioML 2016.10a, 3 seeds, 5\% poison, synthetic I/Q trigger. Cells are ASR (\%) mean$\pm$s.d.\ over SNR and seeds; the last column is clean accuracy over all runs. The poisoned base reaches ASR 99.54\% at 57.66\% clean accuracy. The $r{=}1.0$ cell of the deletion row is the gold retrain. The recall cliff reproduces: deletion fails at $r\leq0.75$ (per-SNR ASR 90.3--100\% at $r{=}0.75$ and 89.6--100\% at $r{=}0.5$), while trigger-aware repair keeps the SNR-averaged ASR below 5\% to $r{=}0.5$.
+\end{table}

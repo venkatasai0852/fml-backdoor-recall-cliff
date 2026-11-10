@@ -1,0 +1,45 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+We asked a narrow question: once a detector has done its imperfect best, what
+does the removal stage actually deliver? The answer, across ten
+recall--precision cells, four architecture--attack combinations, three seeds,
+five removal families, and a second signal domain, is that it delivers what the
+detector's recall allows and very little more. Deletion behaves as a step
+function. At full recall it meets the success criterion; at $0.95$ recall the
+attack is suppressed but the clean-accuracy cost has already broken the
+criterion; at $0.90$ recall it leaves a model that is $\fset$-free by
+construction and still $100\%$ attackable, at every seed and every setting we
+tried. False positives are a second-order cost by comparison, visible only when
+they are numerous enough to remove a large block of clean data.
+
+The one method that degrades gracefully is repair followed by inoculation, and
+the qualification matters more than the result. It tolerates $r{=}0.5$ because
+its inoculation batch supplies the trigger, and a model trained to ignore that
+trigger ignores it whether or not every poisoned sample was found. When we
+replaced the known trigger with a synthesised one, the recovered patch had zero
+pixel overlap with the true trigger and attack success stayed above $95\%$. The
+recipe is therefore a ceiling on what trigger-aware repair can achieve against a
+fixed attack, not a blind post-training defence. Calibrate-then-remove inherits
+the same dependency and, in our sweep, could not find a threshold that separated
+poison from clean data; amplify-and-detect did not raise the detectability of
+missed poison above the promotion gate; and the apparent success of feature-space
+ascent was an artefact of frozen batch-norm statistics.
+
+Two further results bound the claims that removal papers can make. Durability
+probes show suppression rather than erasure: the oracle-deleted model resists
+membership inference and output-divergence tests yet returns to $97.7\%$ attack
+success within ten relearning steps. And the recall cliff is not a CIFAR
+artefact; on RadioML automatic modulation classification the minimum recall
+$\gstar$ traces the same boundary as a function of SNR, rising where the clean
+task itself becomes difficult.
+
+The practical recommendation is a reporting one. A removal result quoted at a
+single detector operating point cannot be interpreted, because the underlying
+quantity is the amount of poison left behind, not the method's name or its
+hyperparameters. Reporting removal as a curve over $(r,p)$, together with the
+tolerance $\rstar$ and an explicit statement of whether the trigger was known,
+would make results comparable and would expose the trigger dependence that our
+experiments show is decisive. Under that reporting standard, the field's
+post-training methods are bounded by detection, and improving the detector
+remains the only lever that moves the bound.

@@ -1,0 +1,23 @@
+\begin{table}[t]
+\centering
+\caption{E3: Calibrate-then-Remove fails because the proxy signal is uninformative.}
+\label{tab:car}
+\footnotesize
+\begin{tabular}{ccccccc}
+\toprule
+\textbf{$\theta$} & \textbf{Recall} & \textbf{Precision} & \textbf{$\tau$} & \textbf{F1} & \textbf{Clean} & \textbf{ASR} \\
+\midrule
+0.01 & 1.000 & 0.333 & 97.5 & 0.500 & 82.32 & 99.78 \\
+20.71 & 1.000 & 0.396 & 100.0 & 0.567 & 88.01 & 100.00 \\
+35.33 & 0.998 & 0.486 & 100.0 & 0.654 & 88.77 & 100.00 \\
+50.23 & 0.992 & 0.628 & 100.0 & 0.769 & 88.88 & 100.00 \\
+74.23 & 0.956 & 0.863 & 100.0 & 0.907 & 89.19 & 100.00 \\
+127.71 & 0.633 & 0.999 & 100.0 & 0.775 & 89.20 & 100.00 \\
+191.72 & 0.161 & 1.000 & 100.0 & 0.277 & 89.29 & 99.98 \\
+291.83 & 0.003 & 1.000 & 100.0 & 0.006 & 89.22 & 99.98 \\
+\midrule
+F1-optimal & 0.894 & 0.942 & 100.0 & 0.918 & 86.71 & 99.97 \\
+\bottomrule
+\end{tabular}
+\par\vspace{1pt}\footnotesize\raggedright Calibrate-then-Remove, seed 0. $\theta$ is the Spectral-Signature threshold, $\tau$ the trigger response of the proxy-removed model (\%). Nineteen of twenty thresholds give $\tau{=}100\%$ and the twentieth $97.5\%$: the synthesised trigger never elicits the backdoor (IoU $=0.000$ against the true patch), so no threshold satisfies $\tau\leq5\%$ and CaR degenerates to its fallback. Both the F1-optimal and the CaR choice leave ASR $\approx100\%$.
+\end{table}

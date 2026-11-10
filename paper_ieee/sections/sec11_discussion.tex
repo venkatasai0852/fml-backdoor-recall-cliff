@@ -1,0 +1,130 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{The Cliff Is About Residual Poison}
+The grid and the partial-deletion block agree on a simple statement: what
+matters is whether any poison remains, not how much was removed. A model trained
+on 2{,}250 of 2{,}500 poison samples behaves like a fully poisoned model; a model
+trained on 125 behaves like a nearly clean one. The transition is sharp enough
+that the difference between a detector with 90\% recall and one with 100\% recall
+is the difference between no defence and a complete defence. This is why the
+success tolerance of deletion is exactly $\rstar{=}1.00$ rather than a value
+slightly below one.
+
+The result is an empirical statement about this family of attacks and models, not
+a theorem. A trigger with a smaller effective support, a lower poison rate, or a
+model with more capacity might move the step. But the step was in the same place
+across two architectures, two triggers, and two modalities, and it was visible
+from both directions (increasing recall in the grid, increasing residual poison
+in E2). We would be surprised if it moved far under moderate changes to the
+protocol.
+
+\subsection{Detector Engineering Should Optimise Recall}
+The precision axis is nearly flat. At fixed recall, adding clean false positives
+to the forget set changes ASR by less than a point for deletion and by a small,
+non-monotone amount for the recipe. The cost appears on the utility side, where
+the recipe loses at most about 0.6 points across the precision cells. This
+suggests a division of labour: detector design should maximise recall subject to
+a precision floor that keeps the forget set affordable, and removal design should
+assume that the forget set will contain clean data.
+
+The activation-clustering result at 10\% poison is a warning about detector
+design as much as about removal. The detector returns nothing at exactly the
+poison rate where the attack is strongest, because its cluster-size threshold
+assumes that poison is a small minority. A detector that cannot flag a large
+poison fraction is not conservative; it is silently permissive. Reporting recall
+and precision at a single poison rate would not have revealed this.
+
+\subsection{Why Trigger-Aware Repair Tolerates Half the Poison}
+The recipe does not need to identify every poisoned sample because its
+inoculation stage changes the trigger-to-target association for the whole
+network. Label repair removes the label noise that would otherwise re-teach the
+association on the flagged subset; inoculation teaches the network that the
+trigger is uninformative on a large sample of clean data. The two mechanisms
+cover different failures: repair handles the poison that was found, inoculation
+handles the poison that was missed, up to a point. The balance breaks at
+$r{=}0.25$, where three-quarters of the poison keeps its original label and the
+inoculation signal is not enough.
+
+This also explains why the recipe's clean-accuracy cost grows with architecture
+depth and trigger strength. Inoculation is a data-dependent regulariser, and the
+network must fit both the retained data and the re-labelled trigger examples. The
+cost is small (about one point) on ResNet-18 and larger (up to 4.1 points) on
+VGG-16-BN with Blend, which is the setting with the largest distribution shift
+between clean and trigger-stamped inputs.
+
+\subsection{The Known-Trigger Bound Is the Central Limitation}
+The recipe's tolerance is bought with the true trigger, and the synthesis
+experiment shows that the purchase cannot be avoided by estimating the trigger
+from the model. On both CIFAR attacks the synthesised mask had zero or near-zero
+overlap with the true patch, and inoculation with it left ASR above 95\%. This
+places the recipe on the ceiling side of the problem: it is a strong upper bound
+on what post-training repair can do, and it is not a blind defence.
+
+The bound matters for how the paper should be cited. A reader should not take
+away ``repair removes backdoors at 50\% recall''. The correct takeaway is
+``repair removes backdoors at 50\% recall if the trigger is known; if it is not,
+no method in this study does''. The first statement is a benchmark result. The
+second is the deployment result.
+
+\subsection{Relation to Prior Work}
+Our findings are consistent with the negative result of Pawelczyk \etal{} for
+approximate unlearning \cite{pawelczyk}, and they add a controlled curve that
+separates the effect of missed poison from the effect of deleted clean data. They
+are also consistent with the relearning result of Hu \etal{} \cite{jogging}: the
+oracle-deleted model looks clean by membership inference and by output
+divergence, yet relearns the backdoor in ten steps. The difference is that our
+probe is a vision classifier and the poison is a trigger, not a text corpus, so
+the dormancy is not a language-model artefact.
+
+The ascent artefact is, as far as we know, under-reported. Evaluations of
+unlearning that use feature-space ascent without a normalisation control may be
+measuring batch-norm corruption. We recommend that any ascent-based removal
+result be reported alongside a run with batch-norm statistics frozen to the
+retain set.
+
+\subsection{A Procedure for Detector-Bounded Removal}
+The results support a short procedure for anyone who has to remove a backdoor
+after training, and each step is tied to a measurement in this paper.
+
+\emph{1. Measure recall on ground-truth poison, not detection F1.} The quantity
+that predicts removal outcome is the fraction of poison in the forget set. A
+detector report that quotes only F1 or only a threshold hides it. A small
+poisoned pilot with known poison labels gives the recall curve directly and costs
+a fraction of the removal runs it will govern.
+
+\emph{2. Without trigger knowledge, treat deletion as all-or-nothing.} In our
+grid the smallest tested recall at which retraining on the retained set passes
+the joint criterion is $1.00$; at $0.95$ the ASR is low but the clean-accuracy
+cost already fails the criterion, and at $0.90$ the backdoor is at full strength.
+A detector whose upper confidence bound on recall does not reach the top of that
+cliff should not be used to justify a deletion-based removal claim.
+
+\emph{3. With trigger knowledge, repair is an option, with a budget.} The recipe
+holds ASR below $5\%$ down to $r{=}0.5$ at precision 1.0 and below $3\%$ at
+precision 0.7, at a clean-accuracy cost of about $1.3$ points on the ResNet-18
+grid; on the transferred settings of Section~\ref{sec:general} the cost rises to
+$4.09$ points in the hardest case (VGG-16-BN with Blend at $r{=}0.5$). The
+budget, not the average, is what a deployment decision needs.
+
+\emph{4. Validate with relearning, and control for batch norm.} A removal claim
+that stops at ASR and membership inference can be satisfied by suppression: our
+oracle-deleted model returns to $97.7\%$ ASR within ten steps. Any ascent-based
+result should be reported next to a run with batch-norm statistics frozen, since
+without that control the apparent removal may be normalisation damage.
+
+Nothing in this procedure requires a new method. It requires reporting the
+detector's recall, the precision at which it was measured, whether the trigger
+was known, and a relearning probe. Those four items are enough to make removal
+results comparable across papers.
+
+\subsection{What Would Change the Conclusion}
+Three developments would move the conclusion from negative to positive. A
+detector with recall at or near 1.0 at usable precision would make deletion
+viable, and the cliff would become irrelevant. A trigger-synthesis method with
+high IoU on realistic attacks would make the recipe blind, and its tolerance
+would become deployable. An amplification signal that survives matched controls
+and a utility budget would make iterative detect-remove loops viable. None of
+these was observed here. Until one is, the honest engineering advice is to invest
+in provenance and duplicate detection before training, because post-training
+removal cannot compensate for a detector that misses poison.

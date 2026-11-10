@@ -1,0 +1,64 @@
+\section*{Author Contributions}
+\label{sec:contrib}
+
+\textbf{Thota Venkata Sai} designed the controlled forget-set protocol and the
+success criterion, wrote the frozen experimental core (\texttt{core\_kaggle.py})
+and the seed-0 driver (\texttt{person\_sai.py}), and ran the seed-0 grid, the
+calibrate-then-remove sweep (E3), the raw-detector evaluation (E6), the BadNets
+trigger-synthesis run (E7b), the full-scale amplification block (E9), and the
+RadioML study. \textbf{Sarang N S} ran the seed-1 grid, the VGG-16-BN transfer
+settings (E7), and the ascent and batch-normalisation control block (E8), and
+wrote \texttt{person\_sarang.py}. \textbf{Divyansh Tiwari} ran the seed-2 grid,
+the ResNet-18/Blend transfer setting, the Blend trigger-synthesis run, and the
+SISA baselines, and wrote \texttt{person\_divyansh.py}. \textbf{Urja Mandali} ran
+the residual-poison block (E2), the relearning, membership-inference, and KL
+probes (E5), and the pilot partial-deletion baselines, and wrote
+\texttt{person\_urja.py}. All authors reviewed the protocol, checked the run logs
+against the tables, and approved the manuscript.
+
+\section*{Artifact Map and Reproducibility}
+\label{sec:artifact}
+
+Every number in this paper is produced by a small set of files. The frozen core
+defines the models, the two attacks, the two detectors, the training loop, and the
+CSV logger. The four person drivers import that core and add only the experiment
+blocks assigned above; each run appends one row containing the requested and
+realised recall and precision, the forget-set size, clean accuracy, ASR,
+wall-clock time, and free-text notes. The rows are merged, validated, and read by
+the paper builder, which writes the \LaTeX{} tables and the PDF figures directly.
+No table value is typed by hand.
+
+\begin{table*}[t]
+\centering
+\caption{Artifact map. Every file listed is included in the accompanying
+repository; its README maps each name to the exact path.}
+\label{tab:artifact}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}p{0.20\textwidth}p{0.34\textwidth}p{0.40\textwidth}@{}}
+\toprule
+\textbf{Stage} & \textbf{File(s)} & \textbf{What it produces} \\
+\midrule
+Frozen core & \texttt{core\_kaggle.py} & Model definitions (ResNet-18, VGG-16-BN, 1-D CNN), BadNets and Blend injection, activation clustering and spectral signatures, training and evaluation, CSV logging. \\
+Drivers & \texttt{person\_sai.py}, \texttt{person\_sarang.py}, \texttt{person\_divyansh.py}, \texttt{person\_urja.py} & E1 (one seed each), E2, E3, E5--E9, SISA, pilot baselines; one CSV row per run. \\
+Run logs & \texttt{runs\_sai.csv}, \texttt{runs\_sarang.csv}, \texttt{runs\_sarang\_v2.csv}, \texttt{runs\_divyansh.csv} & Raw CIFAR runs, including degenerate detector outputs kept for the record. \\
+Auxiliary logs & \texttt{metrics\_table\_urja.csv}, \texttt{relearning\_summary\_urja.csv}, \texttt{detection\_sai.csv}, \texttt{fine\_pruning\_sai.csv}, \texttt{spike\_repair\_seed0.csv}, \texttt{spike\_repair\_seed1.csv} & E2 probes, E5 relearning, detector operating points, fine-pruning, amplification spike. \\
+Radio logs & \texttt{runs\_rf\_study.csv}, \texttt{rf\_study\_per\_snr.csv}, \texttt{gamma\_star.csv} & RadioML run-level ASR, per-SNR cells, and $\gstar$. \\
+Merge and checks & \texttt{merge\_runs.py}, \texttt{validate\_runs.py}, \texttt{smoke\_core.py}, \texttt{smoke\_rf\_study.py} & Master table, schema and range validation, offline smoke tests. \\
+Paper build & \texttt{build\_paper\_assets.py}, \texttt{build\_extra\_figures.py}, \texttt{audit\_numbers.py} & All tables and figures; independent recomputation of every headline number from the CSVs. \\
+Notebooks & \texttt{make\_sai\_notebook.py}, \texttt{make\_sarang\_fix\_notebook.py}, \texttt{make\_divyansh\_fix\_notebook.py}, \texttt{make\_team\_notebooks.py}, \texttt{make\_RF\_study\_notebook.py} & Kaggle notebooks that wrap the frozen core and a person driver; the notebooks are generated, not edited by hand. \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+The reproduction path is four commands: run the four drivers on Kaggle
+(2$\times$T4, approximately 23 GPU-hours for the CIFAR blocks and one hour for the
+radio block), merge their CSV outputs, run the validator, then run the asset
+builder. The builder is deterministic given the CSVs, so the tables in this paper
+can be regenerated without retraining a model; \texttt{audit\_numbers.py} performs
+the independent check and prints the value behind each claim. Model checkpoints
+are not distributed, because they are large and reproducible from the drivers;
+all result CSVs, the fixed splits, the trigger definitions, and the seed
+assignments are included. The repository also contains the notebook generators
+and the smoke tests used before the full runs, so the environment can be checked
+on a laptop CPU before any GPU time is spent.

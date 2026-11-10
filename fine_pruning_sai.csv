@@ -1,0 +1,17 @@
+arch,attack,poison_rate,prune_ratio,clean_acc,ASR
+resnet18,badnets,0.05,0.0,69.5,100.0
+resnet18,badnets,0.05,0.2,67.1,99.94
+resnet18,badnets,0.05,0.4,65.5,63.64
+resnet18,badnets,0.05,0.6,61.3,0.0
+resnet18,badnets,0.05,0.7,57.05,0.0
+resnet18,badnets,0.05,0.8,56.5,0.0
+resnet18,badnets,0.05,0.9,48.25,0.0
+resnet18,badnets,0.05,0.95,39.05,0.0
+vgg16_bn,badnets,0.05,0.0,71.0,100.0
+vgg16_bn,badnets,0.05,0.2,71.3,100.0
+vgg16_bn,badnets,0.05,0.4,70.1,100.0
+vgg16_bn,badnets,0.05,0.6,69.3,100.0
+vgg16_bn,badnets,0.05,0.7,68.05,100.0
+vgg16_bn,badnets,0.05,0.8,67.45,100.0
+vgg16_bn,badnets,0.05,0.9,67.85,0.0
+vgg16_bn,badnets,0.05,0.95,62.2,0.0

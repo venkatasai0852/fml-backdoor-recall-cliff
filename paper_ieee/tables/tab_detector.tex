@@ -1,0 +1,19 @@
+\begin{table}[t]
+\centering
+\caption{Measured detector operating points: the noisy forget sets that motivate the grid.}
+\label{tab:detector}
+\footnotesize
+\begin{tabular}{cccccc}
+\toprule
+\textbf{Poison} & \textbf{Det.} & \textbf{Flagged} & \textbf{TP} & \textbf{Precision} & \textbf{Recall} \\
+\midrule
+1\% & AC & 507 & 500 & 0.986 & 1.000 \\
+1\% & SS & 750 & 169 & 0.225 & 0.338 \\
+5\% & AC & 4,140 & 2,500 & 0.604 & 1.000 \\
+5\% & SS & 3,750 & 2,411 & 0.643 & 0.965 \\
+10\% & AC & 0 & 0 & -- & -- \\
+10\% & SS & 7,500 & 2,400 & 0.320 & 0.480 \\
+\bottomrule
+\end{tabular}
+\par\vspace{1pt}\footnotesize\raggedright Detector output on a ResNet-18/BadNets model; TP is the number of true poison samples among the flags. At 10\% poison, AC returns an empty flag set (no cluster passes its size/silhouette test), i.e.\ $r=0$: the detector, not the removal method, is the binding constraint. VGG-16-BN and MobileNetV2 detector runs were degenerate (no flags or no true positives) and are excluded.
+\end{table}

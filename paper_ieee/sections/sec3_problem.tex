@@ -1,0 +1,149 @@
+\section{Problem Formulation and Metrics}
+\label{sec:problem}
+
+\subsection{Setup}
+Let $\mathcal{D}=\{(x_i,y_i)\}_{i=1}^{N}$ be a training set and let
+$\mathcal{P}\subset\mathcal{D}$ be the poisoned subset, $|\mathcal{P}|=N_p$.
+A model $f=\mathcal{A}(\mathcal{D})$ is produced by a fixed training algorithm
+$\mathcal{A}$; in this paper $\mathcal{A}$ is the schedule of
+Table~\ref{tab:protocol}. For a target class $y_t$ and a trigger function $T$,
+the attack success rate is
+\begin{equation}
+\ASR(f)=\frac{1}{|\mathcal{D}_{\mathrm{test}}|}
+\sum_{(x,y)\in\mathcal{D}_{\mathrm{test}}}
+\mathbb{1}\!\left[f(T(x))=y_t\right],
+\label{eq:asr}
+\end{equation}
+and clean accuracy is the usual top-1 accuracy on unmodified test inputs. A
+backdoor is considered present when $\ASR$ is high and clean accuracy is close
+to that of a model trained without poison. The gold reference is
+$f_{\mathrm{gold}}=\mathcal{A}(\mathcal{D}\setminus\mathcal{P})$, trained on the
+same data with the true poison removed. All success statements are relative to
+$f_{\mathrm{gold}}$, not to the poisoned model, because the poisoned model's
+clean accuracy can be slightly higher or lower by chance and would otherwise
+make weak methods look adequate.
+
+\subsection{Detectors and Their Operating Points}
+A detector is a map $\mathrm{DET}:\mathcal{D}\to 2^{\mathcal{D}}$ producing a
+flagged set $S$. Relative to the ground-truth poison,
+\begin{equation}
+r=\frac{|S\cap\mathcal{P}|}{|\mathcal{P}|},\qquad
+p=\frac{|S\cap\mathcal{P}|}{|S|},
+\label{eq:det}
+\end{equation}
+with $p$ defined as zero when $S=\emptyset$. Recall $r$ is the fraction of
+poison the removal method will see; precision $p$ is the fraction of the flagged
+set that is genuinely poisoned. Both matter, but they enter the removal problem
+asymmetrically: a missed poison sample remains in the training set and can
+sustain the backdoor, whereas a falsely flagged clean sample is merely removed
+from training. The experiments are designed to expose that asymmetry.
+
+\subsection{Controlled Forget Sets}
+Rather than threshold a detector score, we construct the forget set directly.
+For requested recall $r\in[0,1]$ and precision $p\in(0,1]$, let
+\begin{equation}
+\fset(r,p)=A\cup B,\quad
+A\subseteq\mathcal{P},\ |A|=\mathrm{round}(N_p r),
+\label{eq:forgetA}
+\end{equation}
+\begin{equation}
+B\subseteq\mathcal{D}_{\mathrm{clean}}\setminus
+\mathcal{C}_{y_t},\quad
+|B|=\mathrm{round}\!\left(\frac{N_p r(1-p)}{p}\right),
+\label{eq:forgetB}
+\end{equation}
+where $\mathcal{C}_{y_t}$ is the set of clean training samples of the target
+class. The sizes follow from the definition of precision: if $|A|=N_p r$ and
+$|A|/|A\cup B|=p$, then $|\fset|=N_pr/p$ and $|B|=N_pr(1-p)/p$. False positives
+are drawn from non-target clean data so that the forget set never removes clean
+examples of the class the attacker wants to protect, which would confound
+removal with class deletion. Both $A$ and $B$ are sampled without replacement
+with a seed derived from $(r,p,\text{seed})$, so the construction is
+deterministic and reproducible. Algorithm~\ref{alg:forget} states the procedure.
+
+\begin{algorithm}[t]
+\caption{Controlled forget-set construction}
+\label{alg:forget}
+\begin{algorithmic}[1]
+\Require training set $\mathcal{D}$, poison mask, $r$, $p$, seed $s$
+\Ensure $\fset(r,p)$ with $|\fset|=N_pr/p$
+\State $\mathcal{P}\gets$ poisoned indices; $N_p\gets|\mathcal{P}|$
+\State $n_A\gets\mathrm{round}(N_pr)$
+\State $n_B\gets\mathrm{round}(N_pr(1-p)/p)$
+\State $A\gets$ sample $n_A$ indices from $\mathcal{P}$ with seed $s$
+\State $C\gets$ clean, non-target training indices
+\State $B\gets$ sample $n_B$ indices from $C$ with seed $s$
+\State \Return $A\cup B$
+\end{algorithmic}
+\end{algorithm}
+
+The construction has three properties that matter for interpretation. First,
+$|\fset|$ grows as $p$ falls at fixed $r$: with $N_p=2{,}500$, the cell
+$(r,p)=(0.90,1.0)$ removes 2{,}250 samples, while $(0.90,0.7)$ removes 3{,}214.
+Precision is therefore also a measure of how much clean data the method must
+give up. Second, $r$ and $p$ are requested values; the realised values are stored
+with each run and differ only by rounding, because the counts are integers.
+Third, the construction is deliberately kinder than a real detector in one
+respect: it never places a false positive in the target class and it never
+places poison in the retain set when $r=1$. Real detectors do both. The grid is
+therefore a best-case controlled manipulation of detector error, not a
+simulation of a specific detector. Section~\ref{sec:cliff} anchors it to two real
+detectors by running the same removal methods on their raw flag sets.
+
+\subsection{Defence Success and the Tolerance $\rstar$}
+A removal run is a success when both halves of the following criterion hold:
+\begin{equation}
+\ASR(f')\leq 5\%\quad\text{and}\quad
+\mathrm{Acc}_{\mathrm{clean}}(f')\geq
+\mathrm{Acc}_{\mathrm{clean}}(f_{\mathrm{gold}})-2.
+\label{eq:success}
+\end{equation}
+The first half says the backdoor is no longer usable at a rate that would matter
+to an attacker; the second says the cure did not cost more than two points of
+utility. The two-point budget is a modelling choice; it is wide enough to absorb
+seed noise (the gold model itself varies by about $\pm0.1$ points) and narrow
+enough to exclude methods that remove the backdoor by damaging the network. We
+report the two quantities separately in every table so that a reader who prefers
+a different budget can re-derive the verdicts. For each method we then define
+\begin{equation}
+\begin{aligned}
+\rstar=\min\Bigl\{r:\ &\overline{\ASR}(r,1)\leq 5\%\ \text{and}\\
+&\overline{\mathrm{Acc}}_{\mathrm{clean}}(r,1)\geq
+\overline{\mathrm{Acc}}_{\mathrm{clean}}(f_{\mathrm{gold}})-2\Bigr\},
+\end{aligned}
+\label{eq:rstar}
+\end{equation}
+where the bar is the mean over the three seeds, and write $\rstar=\text{--}$ when
+no recall in the grid succeeds. We use the mean because the criterion describes a
+deployment, not a single training run; the per-seed counts are reported
+separately in Table~\ref{tab:success} so that a reader who requires unanimity can
+see exactly where the two readings diverge. The tolerance is a property of a
+removal method, not of a detector: it states how much detector recall the method
+needs before it can be relied on.
+
+\subsection{Secondary Metrics}
+For the amplification study we ask whether partial removal makes missed poison
+separable from clean data. Let $\mathcal{M}=\mathcal{P}\setminus\fset$ be the
+poison missed by the forget set and let $\mathcal{C}_0$ be clean
+training data of the target class. We fit a detector score to distinguish
+$\mathcal{M}$ from $\mathcal{C}_0$ and report the area under the ROC curve,
+\begin{equation}
+\mathrm{AUC}=\Pr\!\left[s(x_{\mathrm{missed}})>s(x_{\mathrm{clean}})\right],
+\label{eq:auc}
+\end{equation}
+with ties counted at one half. An AUC of 0.5 is chance. For durability we report
+ASR after $k$ gradient steps on fresh poison, a loss-threshold membership
+inference AUC following Shokri \etal{} \cite{mia}, and the Kullback--Leibler
+divergence between the output distributions on clean and trigger-stamped inputs.
+A live backdoor shows a large clean-versus-trigger divergence; a dormant one does
+not.
+
+\subsection{Statistical Treatment}
+Every CIFAR-10 cell is run with seeds 0, 1, and 2. Poison placement, weight
+initialisation, and data order vary with the seed; the training and test splits
+do not. We report mean $\pm$ standard deviation over seeds and, for the success
+criterion, the count of seeds that pass. With three seeds the counts are coarse,
+and we do not attach confidence intervals to them. When a method is bimodal
+across seeds (NegGrad+ is the clearest case), the mean and standard deviation
+describe a mixture rather than a stable operating point; we say so in the table
+notes instead of hiding it in a single number.

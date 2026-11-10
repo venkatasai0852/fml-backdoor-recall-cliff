@@ -1,0 +1,27 @@
+\begin{table}[t]
+\centering
+\caption{E9: the amplification effect does not survive at full scale.}
+\label{tab:e9}
+\footnotesize
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{lccc}
+\toprule
+\multicolumn{4}{@{}l}{\emph{(a) AUC separating missed poison from clean class-0 data}}\\
+\textbf{Condition} & \textbf{Seed 0} & \textbf{Seed 1} & \textbf{Seed 2} \\
+\midrule
+Base & 0.494 & 0.499 & 0.496 \\
+Repair, lr 0.005 & 0.470 & 0.497 & 0.487 \\
+Repair, lr 0.01 & 0.468 & 0.476 & 0.499 \\
+Clean control, lr 0.005 & 0.492 & 0.499 & 0.501 \\
+Clean control, lr 0.01 & 0.495 & 0.503 & 0.501 \\
+\midrule
+\multicolumn{4}{@{}l}{\emph{(b) Repair outcomes (lr 0.005 / lr 0.01)}}\\
+\textbf{Seed} & \textbf{ASR (\%)} & \textbf{Clean acc.\ (\%)} & \\
+\midrule
+0 & 11.1 / 33.0 & 88.2 / 86.8 & \\
+1 & 15.9 / 17.7 & 88.1 / 86.9 & \\
+2 & 21.3 / 29.6 & 88.1 / 87.3 & \\
+\bottomrule
+\end{tabular}
+\par\vspace{1pt}\footnotesize\raggedright 10\% poison, simulated recall-0.5 flags. AUC separates the 2{,}500 \emph{missed} poison samples from clean class-0 data. Partial label repair lowers ASR but does not raise AUC above the base model by more than $0.003$ in any seed; the matched clean-removal controls keep ASR at 99.94--100.00\% and clean accuracy at 86.7--87.8\%, and their AUC sits at chance. The pre-registered promotion gate ($\geq+0.10$ AUC, $\leq2$ points clean loss, beating control) fails on every clause.
+\end{table}

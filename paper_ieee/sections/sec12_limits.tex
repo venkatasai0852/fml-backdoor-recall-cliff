@@ -1,0 +1,78 @@
+\section{Limitations and Threats to Validity}
+\label{sec:limits}
+
+\emph{Benchmark coverage.} The CIFAR-10 study covers two architectures
+(ResNet-18 and VGG-16-BN), two dirty-label attacks (BadNets and Blend), one
+target class, and a 5\% poison rate (10\% in the amplification block). It does
+not cover deeper or wider networks, vision transformers, ImageNet-scale data, or
+clean-label attacks. The cliff could move under a much lower poison rate, where
+the residual poison after a 0.9-recall detection is only a handful of samples, or
+under a trigger whose effective support is larger than a $4\times4$ patch. We
+have no evidence either way, and we do not extrapolate.
+
+\emph{Simulated forget sets.} The primary manipulation constructs the forget set
+directly from ground-truth poison labels with requested recall and precision. It
+is therefore kinder than a real detector in two ways: false positives are drawn
+only from non-target clean data, and the flagged poison is a uniformly random
+subset rather than the easiest or hardest cases. The E6 block anchors the grid to
+two real detector outputs and reproduces the main conclusion, but two anchors are
+not a survey. A detector whose errors are correlated with the poison's
+representation, rather than random, could produce different results; our
+construction cannot see that correlation.
+
+\emph{Detector coverage.} Only activation clustering and spectral signatures were
+swept. Neural Cleanse, ABS, STRIP, and other detectors may have different error
+structure. The VGG-16-BN and MobileNetV2 detector runs were degenerate and are
+excluded, which means the detector side of the study is, in practice, a
+ResNet-18/BadNets study with a cross-check on other cells. The activation
+clustering failure at 10\% poison is a property of its thresholds; a detector
+with different thresholds might not fail there, although it would then have a
+different precision profile.
+
+\emph{Statistical power.} Three seeds per cell give coarse success counts and no
+confidence intervals. We report mean and standard deviation and the count of
+successful seeds, and we flag the one method (NegGrad+) whose distribution is
+bimodal. A larger number of seeds would refine the boundary between 0.90 and
+0.95 recall but would not change the qualitative conclusion, which is visible in
+every seed. The two-point clean-accuracy budget is a modelling choice; a reader
+who prefers one point would move the recipe's $\rstar$ up, and a reader who
+prefers three points would move it down. The per-cell numbers are reported so
+that the verdict can be recomputed.
+
+\emph{The $r{=}0.95$ clean-accuracy drop.} At $r{=}0.95$ and $p{=}1$, deletion
+reaches ASR $2.84\%$ but clean accuracy falls to $84.58\%$, four points below
+gold, with no false positives in the forget set. We did not isolate the cause. It
+may be an optimisation effect of retraining on a set that still contains 125
+poison samples, or a seed-level interaction; the standard deviation across seeds
+is small ($0.59$), so it is not seed noise in the usual sense. We report it as
+measured and use the joint criterion, which fails the cell regardless of the
+cause.
+
+\emph{Unrun blocks.} An adaptive-attacker study (E4) was planned and not
+executed. Every result in this paper assumes a static attack that does not know
+the defence. An attacker who knows that repair and inoculation will be applied
+could try to construct poison that survives relabelling or that is re-activated
+by inoculation, and the recipe's tolerance would then be an upper bound in a
+stronger sense than we intend. A full hyperparameter sweep for the baselines was
+also not run; NegGrad+ and SCRUB were used at their default settings, and a
+better-tuned version might perform differently. SISA and fine-pruning were run
+under shorter schedules than the frozen protocol, which is why their absolute
+clean accuracies are lower; their relative costs are reported with that caveat.
+
+\emph{Radio study.} The trigger is a digital burst applied before normalisation,
+not an over-the-air impairment; the classifier is a small one-dimensional CNN;
+the per-SNR bins have unequal sample counts; and at SNR below $-10$\,dB the clean
+model is near chance. The $\gstar$ values in that region are reported but should
+not be interpreted as defence performance. The study is a replication of the
+cliff, not a claim about radio deployment.
+
+\emph{Durability probe.} The relearning probe used one hundred fresh poison
+samples, a fixed schedule, and no defence-aware optimisation. It was run on the
+gold model, not on the recipe's output, so it bounds the best case for erasure
+rather than characterising every method. A longer probe or a larger poison budget
+would presumably make the backdoor return faster, not slower.
+
+\emph{Theory.} We offer no guarantee. The cliff is an empirical regularity across
+the settings we tested, and the paper's claims are correspondingly empirical.
+Nothing in the results rules out a removal method, outside our suite, that
+provably tolerates a known fraction of missed poison under stated assumptions.

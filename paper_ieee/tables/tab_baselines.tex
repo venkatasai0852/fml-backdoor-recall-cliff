@@ -1,0 +1,27 @@
+\begin{table}[t]
+\centering
+\caption{Efficiency-oriented and sharded baselines.}
+\label{tab:baselines}
+\footnotesize
+\begin{tabular}{lccc}
+\toprule
+\textbf{Method} & \textbf{Recall} & \textbf{Clean} & \textbf{ASR} \\
+\midrule
+SISA-5 (this protocol) & 1.0 & 70.38 & 3.04 \\
+SISA-5 (this protocol) & 0.5 & 67.49 & 100.00 \\
+SISA-5 (pilot) & oracle & 63.83 & 3.79 \\
+SISA-10 (pilot) & oracle & 50.25 & 6.26 \\
+SISA-20 (pilot) & oracle & 37.59 & 8.04 \\
+Fine-pruning R18, 40\% & -- & 65.50 & 63.64 \\
+Fine-pruning R18, 60\% & -- & 61.30 & 0.00 \\
+Fine-pruning VGG, 90\% & -- & 67.85 & 0.00 \\
+\midrule
+Gradient ascent (pilot) & -- & 87.62 & 99.96 \\
+Label repair FT (pilot) & -- & 83.37 & 0.46 \\
+Partial deletion 25\% (pilot) & -- & 89.97 & 99.98 \\
+Partial deletion 50\% (pilot) & -- & 90.13 & 99.96 \\
+Partial deletion 75\% (pilot) & -- & 90.08 & 99.96 \\
+\bottomrule
+\end{tabular}
+\par\vspace{1pt}\footnotesize\raggedright Reviewer-facing baselines. SISA and fine-pruning rows are measured; pilot rows use the minor project's earlier protocol (clean accuracy $\approx$90\%) and are shown for completeness, not pooled with the frozen results. Pilot values are means over the runs recorded in the master results table (two architecture variants for SISA and repair, four runs for partial deletion). SISA's clean accuracy is 18 points below the frozen gold model already at $r{=}1$; fine-pruning needs 60\% (ResNet) or 90\% (VGG) of channels pruned before ASR falls, by which point clean accuracy has dropped 8 and 3 points respectively.
+\end{table}
