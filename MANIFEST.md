@@ -22,7 +22,7 @@ docs. Counts exclude LaTeX build products and `paper_ieee/generated/`.
 
 | File | Bytes | SHA-256 (16) |
 |---|---:|---|
-| `paper_ieee/main.pdf` | 1,164,698 | `955846e0e66cb71b` |
+| `paper_ieee/main.pdf` | 1,165,122 | `c4c383b5c81c8bf8` |
 | `results/sai_2026-11-02/runs_sai.csv` | 10,974 | `4be19744a457b192` |
 | `results/sarang_2026-11-04/handoff_sarang/runs_sarang.csv` | 6,510 | `38e5fb281ddd18c2` |
 | `results/sarang_2026-11-05/runs_sarang_v2.csv` | 4,371 | `387bd869361e4b3e` |
