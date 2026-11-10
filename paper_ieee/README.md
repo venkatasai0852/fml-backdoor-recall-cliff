@@ -13,7 +13,7 @@ pdflatex -interaction=nonstopmode -halt-on-error main.tex
 Run twice so cross-references resolve. No BibTeX run is needed; the bibliography
 is a manual `thebibliography` block in `sections/refs.tex`. The document uses
 only standard packages: IEEEtran, fontenc, mathptmx, amsmath, amssymb, graphicx,
-array, booktabs, multirow, algorithm, algpseudocode, balance, url.
+array, booktabs, multirow, algorithm, algpseudocode, balance, url, hyperref.
 
 On Overleaf, upload the folder and use pdfLaTeX; the source is self-contained.
 
